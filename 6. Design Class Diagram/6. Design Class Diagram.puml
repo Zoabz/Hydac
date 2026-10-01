@@ -16,7 +16,7 @@ class Menu {
   - loggetInd : boolean
   - medarbejderListe : MedarbejderListe
   - gæsteListe : GæsteListe
-  + visMenu() : void
+  + VisMenu() : void
   - login() : void
   - opretMedarbejder() : void
   - opretBesøg() : void
@@ -28,25 +28,24 @@ class Menu {
 class MedarbejderListe {
   - medarbejdere : List<Medarbejder>
   + MedarbejderListe()
-  + findMedarbejder(brugernavn : String, kode : String) : Medarbejder
-  + erIBrug(brugernavn : String) : boolean
-  + tilføj(m : Medarbejder) : void
-  + hentAlle() : List<Medarbejder>
+  + FindMedarbejder(brugernavn : String, kode : String) : Medarbejder
+  + ErIBrug(brugernavn : String) : boolean
+  + Tilføj(m : Medarbejder) : void
+  + HentAlle() : List<Medarbejder>
 }
 
 class GæsteListe {
   - besøgListe : List<Besøg>
-  + tilføj(b : Besøg) : void
-  + findBesøg(kode : String) : Besøg
-  + hentAlle() : List<Besøg>
+  + Tilføj(b : Besøg) : void
+  + FindBesøg(kode : String) : Besøg
+  + HentAlle() : List<Besøg>
 }
 
 class Medarbejder {
   - brugernavn : String
   - kode : String
   + Medarbejder(brugernavn : String, kode : String)
-  + getBrugernavn() : String
-  + tjekKode(kode : String) : boolean
+  + GetBrugernavn() : String
 }
 
 class Besøg {
@@ -62,11 +61,11 @@ class Besøg {
   - udtjekning : Udtjekning
   + Besøg(navn : String, firma : String, ankomst : LocalDateTime,\n afgang : LocalDateTime, lokale : String, ansvarlig : Medarbejder)
   - genererIndtjekningskode() : String
-  + tjekInd() : void
-  + tjekUd() : void
-  + getNavn() : String
-  + getStatus() : BesøgsStatus
-  + getIndtjekningskode() : String
+  + TjekInd() : void
+  + TjekUd() : void
+  + GetNavn() : String
+  + GetStatus() : BesøgsStatus
+  + GetIndtjekningskode() : String
 }
 
 class Indtjekning {
@@ -85,17 +84,113 @@ enum BesøgsStatus <<enumeration>> {
   TJEKKET_UD
 }
 
-Menu "1" --> "1" MedarbejderListe
-Menu "1" --> "1" GæsteListe
+Menu "1" -- "1" MedarbejderListe
+Menu "1" -- "1" GæsteListe
 
-MedarbejderListe "1" o--> "1..*" Medarbejder
-GæsteListe "1" o--> "0..*" Besøg
+MedarbejderListe "1" -- "1..*" Medarbejder
+GæsteListe "1" -- "0..*" Besøg
 
-Besøg "0..*" --> "1" Medarbejder : ansvarlig
-Besøg "1" *--> "0..1" Indtjekning
-Besøg "1" *--> "0..1" Udtjekning
-Besøg --> BesøgsStatus : status
+Besøg "0..*" -- "1" Medarbejder : ansvarlig
+Besøg "1" -- "0..1" Indtjekning
+Besøg "1" -- "0..1" Udtjekning
+Besøg -- BesøgsStatus : status
 
 @enduml
+@startuml
+title Hydac Designklassediagram
 
+hide circle
+hide empty members
+skinparam classAttributeIconSize 0
+skinparam linetype polyline
+skinparam nodesep 80
+skinparam ranksep 80
+skinparam class {
+  BackgroundColor White
+  BorderColor #555555
+}
 
+class Menu {
+  - loggetInd : boolean
+  - medarbejderListe : MedarbejderListe
+  - gæsteListe : GæsteListe
+  + VisMenu() : void
+  - login() : void
+  - opretMedarbejder() : void
+  - opretBesøg() : void
+  - visMedarbejderListe() : void
+  - visGæsteListe() : void
+  - tjekIndUd() : void
+}
+
+class MedarbejderListe {
+  - medarbejdere : List<Medarbejder>
+  + MedarbejderListe()
+  + FindMedarbejder(brugernavn : String, kode : String) : Medarbejder
+  + ErIBrug(brugernavn : String) : boolean
+  + Tilføj(m : Medarbejder) : void
+  + HentAlle() : List<Medarbejder>
+}
+
+class GæsteListe {
+  - besøgListe : List<Besøg>
+  + Tilføj(b : Besøg) : void
+  + FindBesøg(kode : String) : Besøg
+  + HentAlle() : List<Besøg>
+}
+
+class Medarbejder {
+  - brugernavn : String
+  - kode : String
+  + Medarbejder(brugernavn : String, kode : String)
+  + GetBrugernavn() : String
+}
+
+class Besøg {
+  - navn : String
+  - firma : String
+  - forventetAnkomst : LocalDateTime
+  - forventetAfgang : LocalDateTime
+  - lokale : String
+  - ansvarlig : Medarbejder
+  - indtjekningskode : String
+  - status : BesøgsStatus
+  - indtjekning : Indtjekning
+  - udtjekning : Udtjekning
+  + Besøg(navn : String, firma : String, ankomst : LocalDateTime,\n afgang : LocalDateTime, lokale : String, ansvarlig : Medarbejder)
+  - genererIndtjekningskode() : String
+  + TjekInd() : void
+  + TjekUd() : void
+  + GetNavn() : String
+  + GetStatus() : BesøgsStatus
+  + GetIndtjekningskode() : String
+}
+
+class Indtjekning {
+  - reélAnkomstTid : LocalDateTime
+  + Indtjekning(reélAnkomstTid : LocalDateTime)
+}
+
+class Udtjekning {
+  - reélAfgangsTid : LocalDateTime
+  + Udtjekning(reélAfgangsTid : LocalDateTime)
+}
+
+enum BesøgsStatus <<enumeration>> {
+  IKKE_TJEKKET_IND
+  TJEKKET_IND
+  TJEKKET_UD
+}
+
+Menu "1" -- "1" MedarbejderListe
+Menu "1" -- "1" GæsteListe
+
+MedarbejderListe "1" -- "1..*" Medarbejder
+GæsteListe "1" -- "0..*" Besøg
+
+Besøg "0..*" -- "1" Medarbejder : ansvarlig
+Besøg "1" -- "0..1" Indtjekning
+Besøg "1" -- "0..1" Udtjekning
+Besøg -- BesøgsStatus : status
+
+@enduml
