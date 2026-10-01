@@ -1,6 +1,6 @@
 @startuml
-title SSD - Opret Gæstebesøg (Opret Gæstebesøg)
 skinparam style strictuml
+title UC02 - Opret Gæstebesøg
 
 actor Medarbejder
 participant ":System" as System

@@ -4,7 +4,7 @@ title Hydac Designklassediagram
 hide circle
 hide empty members
 skinparam classAttributeIconSize 0
-skinparam linetype polyline
+skinparam linetype ortho
 skinparam nodesep 80
 skinparam ranksep 80
 skinparam class {
@@ -13,184 +13,119 @@ skinparam class {
 }
 
 class Menu {
-  - loggetInd : boolean
-  - medarbejderListe : MedarbejderListe
-  - gæsteListe : GæsteListe
-  + VisMenu() : void
-  - login() : void
-  - opretMedarbejder() : void
-  - opretBesøg() : void
-  - visMedarbejderListe() : void
-  - visGæsteListe() : void
-  - tjekIndUd() : void
-}
-
-class MedarbejderListe {
+  - loggetInd : bool
+  - indloggetMedarbejder : Medarbejder
   - medarbejdere : List<Medarbejder>
-  + MedarbejderListe()
-  + FindMedarbejder(brugernavn : String, kode : String) : Medarbejder
-  + ErIBrug(brugernavn : String) : boolean
-  + Tilføj(m : Medarbejder) : void
-  + HentAlle() : List<Medarbejder>
-}
-
-class GæsteListe {
-  - besøgListe : List<Besøg>
-  + Tilføj(b : Besøg) : void
-  + FindBesøg(kode : String) : Besøg
-  + HentAlle() : List<Besøg>
+  - besøgsListe : List<Besøg>
+  --
+  + Menu()
+  + VisMenu() : void
+  - Login() : void
+  - LogUd() : void
+  - OpretMedarbejder() : void
+  - OpretBesøg() : void
+  - VisMedarbejderListe() : void
+  - VisGæsteListe() : void
+  - TjekIndUd() : void
+  - FindMedarbejder(brugernavn : string, kode : string) : Medarbejder
+  - FindMedarbejder(medarbejderId : int) : Medarbejder
+  - ErBrugernavnIBrug(brugernavn : string) : bool
+  - FindBesøg(indtjekningskode : string) : Besøg
+  - HentBesøgPåDato(dato : DateTime) : List<Besøg>
+  - LæsTekst(spørgsmål : string) : string
+  - LæsTal(spørgsmål : string) : int
+  - LæsDatoTid(spørgsmål : string) : DateTime
+  - LæsJaNej(spørgsmål : string) : bool
+  - VisBesked(besked : string) : void
+  - VisFejl(fejl : string) : void
 }
 
 class Medarbejder {
-  - brugernavn : String
-  - kode : String
-  + Medarbejder(brugernavn : String, kode : String)
-  + GetBrugernavn() : String
+  - {static} næsteId : int
+  - medarbejderId : int
+  - navn : string
+  - brugernavn : string
+  - kodeHash : string
+  - erAdministrator : bool
+  --
+  + Medarbejder(navn : string, brugernavn : string, kode : string, erAdministrator : bool)
+  + GetMedarbejderId() : int
+  + GetNavn() : string
+  + GetBrugernavn() : string
+  + ErAdministrator() : bool
+  + TjekKode(kode : string) : bool
+  + SkiftKode(gammelKode : string, nyKode : string) : bool
+  - HashKode(kode : string) : string
+  + {static} ErKodeGyldig(kode : string) : bool
+  + ToString() : string
+}
+
+class Gæst {
+  - {static} næsteId : int
+  - gæstId : int
+  - navn : string
+  - firma : string
+  --
+  + Gæst(navn : string, firma : string)
+  + GetGæstId() : int
+  + GetNavn() : string
+  + GetFirma() : string
+  + ToString() : string
 }
 
 class Besøg {
-  - navn : String
-  - firma : String
-  - forventetAnkomst : LocalDateTime
-  - forventetAfgang : LocalDateTime
-  - lokale : String
+  - {static} næsteId : int
+  - besøgId : int
+  - gæst : Gæst
   - ansvarlig : Medarbejder
-  - indtjekningskode : String
-  - status : BesøgsStatus
-  - indtjekning : Indtjekning
-  - udtjekning : Udtjekning
-  + Besøg(navn : String, firma : String, ankomst : LocalDateTime,\n afgang : LocalDateTime, lokale : String, ansvarlig : Medarbejder)
-  - genererIndtjekningskode() : String
-  + TjekInd() : void
-  + TjekUd() : void
-  + GetNavn() : String
-  + GetStatus() : BesøgsStatus
-  + GetIndtjekningskode() : String
+  - forventetAnkomst : DateTime
+  - forventetAfgang : DateTime
+  - lokale : string
+  - indtjekningskode : string
+  - status : string
+  - reélAnkomst : DateTime?
+  - reélAfgang : DateTime?
+  - sikkerhedsfolderModtaget : bool
+  --
+  + Besøg(gæst : Gæst, ansvarlig : Medarbejder, forventetAnkomst : DateTime,\n forventetAfgang : DateTime, lokale : string)
+  - GenererIndtjekningskode() : string
+  + TjekInd(sikkerhedsfolderModtaget : bool) : bool
+  + TjekUd() : bool
+  + ErTjekketInd() : bool
+  + ErTjekketUd() : bool
+  + ErPåDato(dato : DateTime) : bool
+  + GetBesøgId() : int
+  + GetGæst() : Gæst
+  + GetAnsvarlig() : Medarbejder
+  + GetForventetAnkomst() : DateTime
+  + GetForventetAfgang() : DateTime
+  + GetLokale() : string
+  + GetIndtjekningskode() : string
+  + GetStatus() : string
+  + GetReélAnkomst() : DateTime?
+  + GetReélAfgang() : DateTime?
+  + GetSikkerhedsfolderModtaget() : bool
+  + ToString(visKode : bool) : string
 }
 
-class Indtjekning {
-  - reélAnkomstTid : LocalDateTime
-  + Indtjekning(reélAnkomstTid : LocalDateTime)
-}
+note right of Besøg
+  status er én af:
+  "Ikke Tjekket Ind"
+  "Tjekket Ind"
+  "Tjekket Ud"
+end note
 
-class Udtjekning {
-  - reélAfgangsTid : LocalDateTime
-  + Udtjekning(reélAfgangsTid : LocalDateTime)
-}
+note bottom of Medarbejder
+  Koden gemmes kun som hash (GDPR).
+  Ved opstart oprettes en
+  administrativ bruger.
+end note
 
-enum BesøgsStatus <<enumeration>> {
-  IKKE_TJEKKET_IND
-  TJEKKET_IND
-  TJEKKET_UD
-}
+Menu "1" o-- "1..*" Medarbejder : medarbejdere
+Menu "1" o-- "0..*" Besøg : besøgsListe
+Menu "1" --> "0..1" Medarbejder : indloggetMedarbejder
 
-Menu "1" -- "1" MedarbejderListe
-Menu "1" -- "1" GæsteListe
-
-MedarbejderListe "1" -- "1..*" Medarbejder
-GæsteListe "1" -- "0..*" Besøg
-
-Besøg "0..*" -- "1" Medarbejder : ansvarlig
-Besøg "1" -- "0..1" Indtjekning
-Besøg "1" -- "0..1" Udtjekning
-Besøg -- BesøgsStatus : status
-
-@enduml
-@startuml
-title Hydac Designklassediagram
-
-hide circle
-hide empty members
-skinparam classAttributeIconSize 0
-skinparam linetype polyline
-skinparam nodesep 80
-skinparam ranksep 80
-skinparam class {
-  BackgroundColor White
-  BorderColor #555555
-}
-
-class Menu {
-  - loggetInd : boolean
-  - medarbejderListe : MedarbejderListe
-  - gæsteListe : GæsteListe
-  + VisMenu() : void
-  - login() : void
-  - opretMedarbejder() : void
-  - opretBesøg() : void
-  - visMedarbejderListe() : void
-  - visGæsteListe() : void
-  - tjekIndUd() : void
-}
-
-class MedarbejderListe {
-  - medarbejdere : List<Medarbejder>
-  + MedarbejderListe()
-  + FindMedarbejder(brugernavn : String, kode : String) : Medarbejder
-  + ErIBrug(brugernavn : String) : boolean
-  + Tilføj(m : Medarbejder) : void
-  + HentAlle() : List<Medarbejder>
-}
-
-class GæsteListe {
-  - besøgListe : List<Besøg>
-  + Tilføj(b : Besøg) : void
-  + FindBesøg(kode : String) : Besøg
-  + HentAlle() : List<Besøg>
-}
-
-class Medarbejder {
-  - brugernavn : String
-  - kode : String
-  + Medarbejder(brugernavn : String, kode : String)
-  + GetBrugernavn() : String
-}
-
-class Besøg {
-  - navn : String
-  - firma : String
-  - forventetAnkomst : LocalDateTime
-  - forventetAfgang : LocalDateTime
-  - lokale : String
-  - ansvarlig : Medarbejder
-  - indtjekningskode : String
-  - status : BesøgsStatus
-  - indtjekning : Indtjekning
-  - udtjekning : Udtjekning
-  + Besøg(navn : String, firma : String, ankomst : LocalDateTime,\n afgang : LocalDateTime, lokale : String, ansvarlig : Medarbejder)
-  - genererIndtjekningskode() : String
-  + TjekInd() : void
-  + TjekUd() : void
-  + GetNavn() : String
-  + GetStatus() : BesøgsStatus
-  + GetIndtjekningskode() : String
-}
-
-class Indtjekning {
-  - reélAnkomstTid : LocalDateTime
-  + Indtjekning(reélAnkomstTid : LocalDateTime)
-}
-
-class Udtjekning {
-  - reélAfgangsTid : LocalDateTime
-  + Udtjekning(reélAfgangsTid : LocalDateTime)
-}
-
-enum BesøgsStatus <<enumeration>> {
-  IKKE_TJEKKET_IND
-  TJEKKET_IND
-  TJEKKET_UD
-}
-
-Menu "1" -- "1" MedarbejderListe
-Menu "1" -- "1" GæsteListe
-
-MedarbejderListe "1" -- "1..*" Medarbejder
-GæsteListe "1" -- "0..*" Besøg
-
-Besøg "0..*" -- "1" Medarbejder : ansvarlig
-Besøg "1" -- "0..1" Indtjekning
-Besøg "1" -- "0..1" Udtjekning
-Besøg -- BesøgsStatus : status
+Besøg "0..*" --> "1" Medarbejder : ansvarlig
+Besøg "0..*" --> "1" Gæst : gæst
 
 @enduml

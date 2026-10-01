@@ -1,9 +1,11 @@
 @startuml
 skinparam style strictuml
-title SSD - Opret Gæstebesøg (Tjek Gæst Ind)
+title UC05 - Tjek Gæst Ind
+actor "Medarbejder" as Medarbejder
 participant ":System" as System
 
-Medarbejder -> System : Indsætter GæsteId
+System --> Medarbejder : System spørger om indtjekningskode
+Medarbejder -> System : Indsætter Indtjekningskode
 System --> Medarbejder : Sikkerhedsfolder modtaget ja/nej
 Medarbejder -> System : Giver svar på modtagelse.
 System --> Medarbejder : Status ændres til Tjekket Ind
