@@ -1,0 +1,44 @@
+@startuml
+autonumber
+skinparam style strictuml
+actor Medarbejder as medarbejder
+participant "System" as system
+database "MedarbejderListe" as medarbejderListe
+database "GæsteListe" as gæsteListe
+
+medarbejder -> system :  OpretMedarbejder()
+activate system
+
+system -> medarbejderListe : Send til Liste 
+activate medarbejderListe
+
+medarbejderListe --> system : Medarbejder godkendt
+deactivate medarbejderListe
+
+system --> medarbejder : "Bruger oprettet!"
+deactivate system
+alt Correct Login
+medarbejder -> system : LoginMedarbejder()
+system --> medarbejder : AktivMedarbejder()
+else Incorrect 
+system --> medarbejder : Forkert Login
+end
+
+
+alt Correct BesøgOprettelse()
+system --> medarbejder  : AktivMedarbjeder == true
+medarbejder -> system : OpretBesøg()
+activate system
+
+system -> gæsteListe : Send til Liste 
+activate gæsteListe
+
+gæsteListe --> system : Besøg godkendt
+deactivate gæsteListe
+
+system --> medarbejder : "Besøg oprettet!"
+deactivate system
+
+else Ikke logget ind
+system --> medarbejder : LoginMedarbejder()
+@enduml

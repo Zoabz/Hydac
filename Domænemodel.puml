@@ -1,0 +1,52 @@
+@startuml
+
+hide circle
+
+
+class Besøg
+{
+  besøg
+  dato
+  forventet ankomst
+  forventet afrejse
+}
+
+class Medarbejder
+{
+  medarbejder
+  navn
+}
+
+class Gæst
+{
+  gæstID
+  navn
+  firma
+}
+
+class Indtjekning{
+  tidspunkt
+  sikkerhedsfolder modtaget
+}
+enum Besøgs_Status{
+  Planlagt
+  Ankommet
+  Udtjekket
+  Ikke mødt
+  Annullert
+}
+
+class Udtjekning{
+  tidspunkt
+}
+
+
+
+Medarbejder "1" - "0..1" Besøg 
+Besøg "1" - "0..1" Gæst 
+Besøg "1" -- "0..1" Indtjekning 
+Besøg ---.. Besøgs_Status : 1
+Besøg "1" -- "0..1" Udtjekning
+
+
+@enduml
