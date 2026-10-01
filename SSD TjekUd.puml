@@ -1,0 +1,10 @@
+@startuml
+skinparam style strictuml
+title SSD - Opret Gæstebesøg (tjek ind)
+
+actor Medarbejder
+participant ":System" as System
+
+Medarbejder -> System : Indsætter GæsteId
+System --> Medarbejder : Status ændres til Tjekket Ud
+@enduml

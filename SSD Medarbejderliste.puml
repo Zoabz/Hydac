@@ -1,0 +1,12 @@
+@startuml
+title SSD - Opret Gæstebesøg (Medarbejderliste)
+skinparam style strictuml
+
+actor Medarbejder
+participant ":System" as System
+
+  Medarbejder -> System : Vis Medarbejderliste (navn)
+  System --> Medarbejder : Medarbejderliste vises
+
+@enduml
+
