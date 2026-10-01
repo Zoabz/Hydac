@@ -1,5 +1,4 @@
 @startuml
-skinparam style strictuml
 title Hydac Sekvensdiagram
 
 skinparam sequenceMessageAlign center
