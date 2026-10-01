@@ -1,0 +1,95 @@
+@startuml Hydac_Designklassediagram_simpel
+
+skinparam backgroundColor #D9D9D9
+skinparam shadowing false
+skinparam classFontName Arial
+skinparam defaultFontName Arial
+skinparam classAttributeIconSize 0
+skinparam nodesep 90
+skinparam ranksep 70
+skinparam padding 5
+
+hide circle
+hide empty members
+
+skinparam class {
+    BackgroundColor White
+    BorderColor Black
+    ArrowColor Black
+    FontColor Black
+}
+skinparam enum {
+    BackgroundColor White
+    BorderColor Black
+    FontColor Black
+}
+
+title Hydac Designklassediagram
+
+class "Menu" as Menu {
+    
+loggetInd : bool
+}
+
+class "MedarbejderListe" as MedarbejderListe {
+    + findMedarbejder(brugernavn, kode) : Medarbejder
+    + erIBrug(brugernavn) : bool
+    + tilføj(m) : void
+    + hentAlle() : List<Medarbejder>
+}
+
+class "GæsteListe" as GaesteListe {
+    + tilføj(b) : void
+    + hentAlle() : List<Besøg>
+    + findBesøg(kode) : Besøg
+}
+
+class "Medarbejder" as Medarbejder {
+    
+brugernavn : string
+kode : string
+}
+
+class "Besøg" as Besog {
+    
+navn : string
+firma : string
+forventetAnkomst : DateTime
+forventetAfgang : DateTime
+lokale : string
+ansvarlig : string
+indtjekningskode : string
+status : BesøgsStatus
+--
+genererIndtjekningskode() : string
++ tjekInd() : void
++ tjekUd() : void
+}
+
+class "Indtjekning" as Indtjekning {
+    
+reélAnkomstTid : DateTime
+}
+
+class "Udtjekning" as Udtjekning {
+    
+reélAfgangsTid : DateTime
+}
+
+enum "BesøgsStatus" as BesogsStatus {
+    IkkeTjekketInd
+    TjekketInd
+    TjekketUd
+}
+
+Menu -down-> "1" MedarbejderListe
+Menu -down-> "1" GaesteListe
+
+MedarbejderListe -down-> "0.." Medarbejder
+GaesteListe -down-> "0.." Besog
+
+Besog -down-> "0..1" Indtjekning
+Besog -down-> "0..1" Udtjekning
+Besog .right.> BesogsStatus
+
+@enduml

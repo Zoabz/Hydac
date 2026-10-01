@@ -14,118 +14,56 @@ skinparam class {
 
 class Menu {
   - loggetInd : bool
-  - indloggetMedarbejder : Medarbejder
   - medarbejdere : List<Medarbejder>
   - besøgsListe : List<Besøg>
   --
-  + Menu()
   + VisMenu() : void
   - Login() : void
-  - LogUd() : void
   - OpretMedarbejder() : void
   - OpretBesøg() : void
   - VisMedarbejderListe() : void
   - VisGæsteListe() : void
   - TjekIndUd() : void
-  - FindMedarbejder(brugernavn : string, kode : string) : Medarbejder
-  - FindMedarbejder(medarbejderId : int) : Medarbejder
-  - ErBrugernavnIBrug(brugernavn : string) : bool
-  - FindBesøg(indtjekningskode : string) : Besøg
-  - HentBesøgPåDato(dato : DateTime) : List<Besøg>
-  - LæsTekst(spørgsmål : string) : string
-  - LæsTal(spørgsmål : string) : int
-  - LæsDatoTid(spørgsmål : string) : DateTime
-  - LæsJaNej(spørgsmål : string) : bool
-  - VisBesked(besked : string) : void
-  - VisFejl(fejl : string) : void
 }
 
 class Medarbejder {
-  - {static} næsteId : int
-  - medarbejderId : int
-  - navn : string
   - brugernavn : string
-  - kodeHash : string
-  - erAdministrator : bool
+  - kode : string
   --
-  + Medarbejder(navn : string, brugernavn : string, kode : string, erAdministrator : bool)
-  + GetMedarbejderId() : int
-  + GetNavn() : string
+  + Medarbejder(brugernavn : string, kode : string)
   + GetBrugernavn() : string
-  + ErAdministrator() : bool
   + TjekKode(kode : string) : bool
-  + SkiftKode(gammelKode : string, nyKode : string) : bool
-  - HashKode(kode : string) : string
-  + {static} ErKodeGyldig(kode : string) : bool
-  + ToString() : string
 }
 
 class Gæst {
-  - {static} næsteId : int
-  - gæstId : int
   - navn : string
   - firma : string
   --
   + Gæst(navn : string, firma : string)
-  + GetGæstId() : int
   + GetNavn() : string
-  + GetFirma() : string
-  + ToString() : string
 }
 
 class Besøg {
-  - {static} næsteId : int
-  - besøgId : int
   - gæst : Gæst
   - ansvarlig : Medarbejder
   - forventetAnkomst : DateTime
   - forventetAfgang : DateTime
   - lokale : string
-  - indtjekningskode : string
+  - indtjekningskode : int
   - status : string
-  - reélAnkomst : DateTime?
-  - reélAfgang : DateTime?
   - sikkerhedsfolderModtaget : bool
   --
   + Besøg(gæst : Gæst, ansvarlig : Medarbejder, forventetAnkomst : DateTime,\n forventetAfgang : DateTime, lokale : string)
-  - GenererIndtjekningskode() : string
-  + TjekInd(sikkerhedsfolderModtaget : bool) : bool
-  + TjekUd() : bool
-  + ErTjekketInd() : bool
-  + ErTjekketUd() : bool
-  + ErPåDato(dato : DateTime) : bool
-  + GetBesøgId() : int
-  + GetGæst() : Gæst
-  + GetAnsvarlig() : Medarbejder
-  + GetForventetAnkomst() : DateTime
-  + GetForventetAfgang() : DateTime
-  + GetLokale() : string
-  + GetIndtjekningskode() : string
+  + TjekInd(sikkerhedsfolderModtaget : bool) : void
+  + TjekUd() : void
+  + GetIndtjekningskode() : int
   + GetStatus() : string
-  + GetReélAnkomst() : DateTime?
-  + GetReélAfgang() : DateTime?
-  + GetSikkerhedsfolderModtaget() : bool
-  + ToString(visKode : bool) : string
 }
 
-note right of Besøg
-  status er én af:
-  "Ikke Tjekket Ind"
-  "Tjekket Ind"
-  "Tjekket Ud"
-end note
+Menu "1" -- "1..*" Medarbejder : medarbejdere
+Menu "1" -- "0..*" Besøg : besøgsListe
 
-note bottom of Medarbejder
-  Koden gemmes kun som hash (GDPR).
-  Ved opstart oprettes en
-  administrativ bruger.
-end note
-
-Menu "1" o-- "1..*" Medarbejder : medarbejdere
-Menu "1" o-- "0..*" Besøg : besøgsListe
-Menu "1" --> "0..1" Medarbejder : indloggetMedarbejder
-
-Besøg "0..*" --> "1" Medarbejder : ansvarlig
-Besøg "0..*" --> "1" Gæst : gæst
+Besøg "0..*" -- "1" Medarbejder : ansvarlig
+Besøg "0..*" -- "1" Gæst : gæst
 
 @enduml
