@@ -1,6 +1,7 @@
 @startuml
-skinparam style strictuml
 title Hydac Sekvensdiagram
+
+hide footbox
 
 skinparam sequenceMessageAlign center
 skinparam participant {
@@ -49,7 +50,6 @@ loop indtil programmet lukkes
     end
     M --> U : spørg om kode
     U -> M : kode
-    create MED
     M -> MED : <<create>>(brugernavn, kode)
     M -> ML : tilføj(m)
     M --> U : "Medarbejder oprettet"
@@ -57,7 +57,6 @@ loop indtil programmet lukkes
   else Opret Besøg [logget ind]
     M --> U : spørg om navn, firma, forventet ankomst,\nforventet afgang, lokale og ansvarlig
     U -> M : oplysninger
-    create B
     M -> B : <<create>>(navn, firma, ankomst, afgang, lokale, ansvarlig)
     B -> B : genererIndtjekningskode()
     B -> B : status = Ikke Tjekket Ind
@@ -89,7 +88,6 @@ loop indtil programmet lukkes
 
     else gæsten er ikke tjekket ind
       M -> B : tjekInd()
-      create I
       B -> I : <<create>>(reélAnkomstTid)
       B -> B : status = Tjekket Ind
       M --> U : "<navn> er nu tjekket ind"
@@ -99,7 +97,6 @@ loop indtil programmet lukkes
       U -> M : svar
       opt svar = ja
         M -> B : tjekUd()
-        create UD
         B -> UD : <<create>>(reélAfgangsTid)
         B -> B : status = Tjekket Ud
         M --> U : "<navn> er nu tjekket ud"
@@ -109,5 +106,8 @@ loop indtil programmet lukkes
 end
 
 @enduml
+
+
+
 
 
