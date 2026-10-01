@@ -1,0 +1,43 @@
+@startuml
+title Hydac Objektmodel
+
+skinparam shadowing false
+skinparam object {
+  BackgroundColor White
+  BorderColor Black
+  ArrowColor Black
+}
+
+object "<u>m1 : Medarbejder</u>" as m1 {
+  navn = "Lars Hansen"
+  kode = "LH42"
+}
+
+object "<u>b1 : Besøg</u>" as b1 {
+  dato = 30-09-2026
+  forventet ankomst tid = 09:00
+  forventet afgangs tid = 15:00
+  lokale = "Mødelokale 2"
+  adgangsnøgle = "N-117"
+}
+
+object "<u>g1 : Gæst</u>" as g1 {
+  navn = "Anna Jensen"
+  firma = "Vestas"
+}
+
+object "<u>i1 : Indtjekning</u>" as i1 {
+  reél ankomst tid = 09:05
+  sikkerhedsfolder modtagelse = Ja
+}
+
+object "<u>s1 : BesøgsStatus</u>" as s1 {
+  værdi = Tjekket Ind
+}
+
+m1 - b1 : ansvarlig for
+b1 - g1 : omfatter
+b1 -- i1 : registreres ved
+b1 .-> s1 : har status
+@enduml
+
