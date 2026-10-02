@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\frede\\Desktop\\Projekter\\Hydac\\8. Program\\HydacSoln\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BC58AE95-8823-46D1-8C05-F9F11B37566A}|Hydac\\Hydac.csproj|c:\\users\\frede\\desktop\\projekter\\hydac\\8. program\\hydacsoln\\hydac\\medarbejder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC58AE95-8823-46D1-8C05-F9F11B37566A}|Hydac\\Hydac.csproj|solutionrelative:hydac\\medarbejder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{255CE553-0C36-F68F-A6AB-3C78B700A0B7}|Hydac\\Hydac.csproj|c:\\users\\frede\\desktop\\projekter\\hydac\\8. program\\hydacsoln\\hydac\\bes\u00F8g.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{255CE553-0C36-F68F-A6AB-3C78B700A0B7}|Hydac\\Hydac.csproj|solutionrelative:hydac\\bes\u00F8g.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BC58AE95-8823-46D1-8C05-F9F11B37566A}|Hydac\\Hydac.csproj|c:\\users\\frede\\desktop\\projekter\\hydac\\8. program\\hydacsoln\\hydac\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC58AE95-8823-46D1-8C05-F9F11B37566A}|Hydac\\Hydac.csproj|solutionrelative:hydac\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{255CE553-0C36-F68F-A6AB-3C78B700A0B7}|Hydac\\Hydac.csproj|c:\\users\\frede\\desktop\\projekter\\hydac\\8. program\\hydacsoln\\hydac\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{255CE553-0C36-F68F-A6AB-3C78B700A0B7}|Hydac\\Hydac.csproj|solutionrelative:hydac\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BC58AE95-8823-46D1-8C05-F9F11B37566A}|Hydac\\Hydac.csproj|c:\\users\\frede\\desktop\\projekter\\hydac\\8. program\\hydacsoln\\hydac\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC58AE95-8823-46D1-8C05-F9F11B37566A}|Hydac\\Hydac.csproj|solutionrelative:hydac\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{255CE553-0C36-F68F-A6AB-3C78B700A0B7}|Hydac\\Hydac.csproj|c:\\users\\frede\\desktop\\projekter\\hydac\\8. program\\hydacsoln\\hydac\\medarbejder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{255CE553-0C36-F68F-A6AB-3C78B700A0B7}|Hydac\\Hydac.csproj|solutionrelative:hydac\\medarbejder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{255CE553-0C36-F68F-A6AB-3C78B700A0B7}|Hydac\\Hydac.csproj|c:\\users\\frede\\desktop\\projekter\\hydac\\8. program\\hydacsoln\\hydac\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{255CE553-0C36-F68F-A6AB-3C78B700A0B7}|Hydac\\Hydac.csproj|solutionrelative:hydac\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,15 +35,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Bes\u00F8g.cs",
+              "DocumentMoniker": "C:\\Users\\frede\\Desktop\\Projekter\\Hydac\\8. Program\\HydacSoln\\Hydac\\Bes\u00F8g.cs",
+              "RelativeDocumentMoniker": "Hydac\\Bes\u00F8g.cs",
+              "ToolTip": "C:\\Users\\frede\\Desktop\\Projekter\\Hydac\\8. Program\\HydacSoln\\Hydac\\Bes\u00F8g.cs",
+              "RelativeToolTip": "Hydac\\Bes\u00F8g.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAjwDkAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-02T11:49:42.557Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Medarbejder.cs",
               "DocumentMoniker": "C:\\Users\\frede\\Desktop\\Projekter\\Hydac\\8. Program\\HydacSoln\\Hydac\\Medarbejder.cs",
               "RelativeDocumentMoniker": "Hydac\\Medarbejder.cs",
               "ToolTip": "C:\\Users\\frede\\Desktop\\Projekter\\Hydac\\8. Program\\HydacSoln\\Hydac\\Medarbejder.cs",
               "RelativeToolTip": "Hydac\\Medarbejder.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAkwFcAAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAACMAAAAAAAAAAAAAADEAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-02T10:47:27.322Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-02T10:47:27.322Z"
             },
             {
               "$type": "Document",
@@ -49,14 +65,14 @@
               "RelativeDocumentMoniker": "Hydac\\Menu.cs",
               "ToolTip": "C:\\Users\\frede\\Desktop\\Projekter\\Hydac\\8. Program\\HydacSoln\\Hydac\\Menu.cs",
               "RelativeToolTip": "Hydac\\Menu.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABcAAABHAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABwAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-10-02T10:41:22.991Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\frede\\Desktop\\Projekter\\Hydac\\8. Program\\HydacSoln\\Hydac\\Program.cs",
               "RelativeDocumentMoniker": "Hydac\\Program.cs",
@@ -64,8 +80,7 @@
               "RelativeToolTip": "Hydac\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-02T10:41:12.049Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-02T10:41:12.049Z"
             }
           ]
         }
