@@ -26,7 +26,7 @@ namespace Hydac
 
                         break;
                     case "2":
-
+                        Besøg.AddBesøg();
                         break;
                     case "3":
                         Console.Clear();
