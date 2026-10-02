@@ -1,113 +1,17 @@
 @startuml
-title Hydac Sekvensdiagram
+skinparam style strictuml
+title SD: Registrer besøg
+participant ":System" as S
+participant ":Besøg" as B
+participant ":Gæst" as G
 
-hide footbox
+create B
+S -> B : create(medarbejderID)
+S<-- B : besøgsID
 
-skinparam sequenceMessageAlign center
-skinparam participant {
-  BackgroundColor White
-  BorderColor #555555
-}
+S-> B : tilføjGæst(navn, firma)
+create G
+B -> G : create(navn, firma)
 
-actor Bruger as U
-participant ":Menu" as M
-participant ":MedarbejderListe" as ML
-participant ":GæsteListe" as GL
-participant "m : Medarbejder" as MED
-participant "b : Besøg" as B
-participant "i : Indtjekning" as I
-participant "u : Udtjekning" as UD
-
-note over M, ML : Ved opstart findes en administrativ bruger i MedarbejderListe
-
-loop indtil programmet lukkes
-  U -> M : vælg menupunkt
-
-  alt Login
-    M --> U : spørg om brugernavn og kode
-    U -> M : brugernavn, kode
-    M -> ML : findMedarbejder(brugernavn, kode)
-    ML --> M : medarbejder / ingen
-    alt korrekt login
-      M -> M : loggetInd = true
-      M --> U : "Du er logget ind"
-    else forkert login
-      M --> U : "Forkert brugernavn eller kode"
-    end
-
-  else Opret Medarbejder / Opret Besøg / Medarbejder Liste [ikke logget ind]
-    M --> U : "Du skal være logget ind"
-
-  else Opret Medarbejder [logget ind]
-    loop indtil brugernavnet er ledigt
-      M --> U : spørg om brugernavn
-      U -> M : brugernavn
-      M -> ML : erIBrug(brugernavn)
-      ML --> M : ja / nej
-      opt brugernavn i brug
-        M --> U : "Vælg andet brugernavn"
-      end
-    end
-    M --> U : spørg om kode
-    U -> M : kode
-    M -> MED : <<create>>(brugernavn, kode)
-    M -> ML : tilføj(m)
-    M --> U : "Medarbejder oprettet"
-
-  else Opret Besøg [logget ind]
-    M --> U : spørg om navn, firma, forventet ankomst,\nforventet afgang, lokale og ansvarlig
-    U -> M : oplysninger
-    M -> B : <<create>>(navn, firma, ankomst, afgang, lokale, ansvarlig)
-    B -> B : genererIndtjekningskode()
-    B -> B : status = Ikke Tjekket Ind
-    M -> GL : tilføj(b)
-    M --> U : "Besøg oprettet"
-
-  else Medarbejder Liste [logget ind]
-    M -> ML : hentAlle()
-    ML --> M : medarbejdere
-    M --> U : vis medarbejdere (uden kode)
-
-  else Gæste Liste
-    M -> GL : hentAlle()
-    GL --> M : besøg
-    alt logget ind
-      M --> U : vis besøg, status og indtjekningskode
-    else ikke logget ind
-      M --> U : vis besøg og status (uden indtjekningskode)
-    end
-
-  else Tjek Ind / Tjek Ud
-    M --> U : spørg om indtjekningskode
-    U -> M : kode
-    M -> GL : findBesøg(kode)
-    GL --> M : besøg / ingen
-
-    alt koden er ugyldig
-      M --> U : "Koden er ugyldig"
-
-    else gæsten er ikke tjekket ind
-      M -> B : tjekInd()
-      B -> I : <<create>>(reélAnkomstTid)
-      B -> B : status = Tjekket Ind
-      M --> U : "<navn> er nu tjekket ind"
-
-    else gæsten er allerede tjekket ind
-      M --> U : "Gæsten er tjekket ind,\nvil du gerne tjekke ud? ja/nej"
-      U -> M : svar
-      opt svar = ja
-        M -> B : tjekUd()
-        B -> UD : <<create>>(reélAfgangsTid)
-        B -> B : status = Tjekket Ud
-        M --> U : "<navn> er nu tjekket ud"
-      end
-    end
-  end
-end
-
+B --> S : tidspunkt
 @enduml
-
-
-
-
-
