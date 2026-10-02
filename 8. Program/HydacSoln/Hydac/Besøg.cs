@@ -39,11 +39,21 @@ namespace Hydac
             string? navn = Console.ReadLine();
             Console.Write("Indtast Firma: ");
             string? firma = Console.ReadLine();
-            Console.WriteLine("Indtast Ansvarlig: ");
             Console.WriteLine("Indtast Forventet Ankomst: ");
+            DateTime forventetankomst = Console.ReadLine();
             Console.WriteLine("Indtast Forventet Afgang: ");
+            DateTime forventetafgang = Console.ReadLine();
             Console.WriteLine("Indtast Lokale: ");
-            Console.WriteLine("Indtast Status: ");
+            string? lokale = Console.ReadLine();
+            Console.WriteLine("Indtast Ansvarlig: ");
+            string? ansvarlig = Console.ReadLine();
+
+            Random rnd = new Random();
+            int indtjekningskode = rnd.Next(10_000_000, 100_000_000);
+
+            string status = "Ikke Tjekke Ind";
+            bool sikkerhedsfolder = false;
+            return new Besøg(navn, firma, forventetankomst, forventetafgang, lokale, ansvarlig, indtjekningskode, status, sikkerhedsfolder);
 
         }
     }
