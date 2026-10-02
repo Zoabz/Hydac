@@ -28,13 +28,7 @@ class Indtjekning{
   tidspunkt
   sikkerhedsfolder modtaget
 }
-enum Besøgs_Status{
-  Planlagt
-  Ankommet
-  Udtjekket
-  Ikke mødt
-  Annullert
-}
+
 
 class Udtjekning{
   tidspunkt
@@ -42,10 +36,9 @@ class Udtjekning{
 
 
 
-Medarbejder "1" - "0..1" Besøg 
-Besøg "1" - "0..1" Gæst 
+Medarbejder "1" - "1" Besøg 
+Besøg "1" - "1" Gæst 
 Besøg "1" -- "0..1" Indtjekning 
-Besøg ---.. Besøgs_Status : 1
 Besøg "1" -- "0..1" Udtjekning
 
 
