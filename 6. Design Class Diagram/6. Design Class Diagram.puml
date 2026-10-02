@@ -31,7 +31,6 @@ class Medarbejder {
   - kode : string
   --
   + Medarbejder(brugernavn : string, kode : string)
-  + GetBrugernavn() : string
   + TjekKode(kode : string) : bool
 }
 
@@ -44,14 +43,15 @@ class Gæst {
 }
 
 class Besøg {
-  - gæst : Gæst
-  - ansvarlig : Medarbejder
-  - forventetAnkomst : DateTime
-  - forventetAfgang : DateTime
-  - lokale : string
-  - indtjekningskode : int
-  - status : string
-  - sikkerhedsfolderModtaget : bool
+  + Gæst : Gæst
+  + Firma : Firma
+  + Ansvarlig : Medarbejder
+  + ForventetAnkomst : DateTime
+  + ForventetAfgang : DateTime
+  + Lokale : string
+  + Indtjekningskode : int
+  + Status : bool
+  + SikkerhedsfolderModtaget : bool
   --
   + Besøg(gæst : Gæst, ansvarlig : Medarbejder, forventetAnkomst : DateTime,\n forventetAfgang : DateTime, lokale : string)
   + TjekInd(sikkerhedsfolderModtaget : bool) : void
