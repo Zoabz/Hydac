@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Hydac
+{
+    public static class Menu
+    {
+        public static bool erLoggetind = false;
+        public static void MenuShow()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Hydac Komme-Gå-System");
+                Console.WriteLine("1. Login");
+                Console.WriteLine("2. Opret besøg");
+                Console.WriteLine("3. Opret medarbejder");
+                Console.WriteLine("4. Vis medarbejder");
+                string? svar = Console.ReadLine();
+                switch (svar) {
+                    case "1":
+                        Medarbejder.Login();
+                        Console.Write("Enter for at komme tilbage...");
+                        Console.ReadLine();
+
+                        break;
+                    case "2":
+
+                        break;
+                    case "3":
+                        Console.Clear();
+                        Medarbejder.OpretMedarbejder();
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.Write("Enter for at komme tilbage...");
+                        Console.ReadLine();
+                        break;
+                    case "4":
+                        Console.Clear();
+                        Medarbejder.ListeMedarbejder();
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.Write("Enter for at komme tilbage...");
+                        Console.ReadLine();
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Ukendt kommando");
+                        Console.Write("Enter for at komme tilbage...");
+                        Console.ReadLine();
+                    break;
+                }
+            }
+        }
+    }
+}
