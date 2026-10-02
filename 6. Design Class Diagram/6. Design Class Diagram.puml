@@ -10,7 +10,7 @@ skinparam ranksep 80
 skinparam class {
   BackgroundColor White
   BorderColor #555555
-}
+  }
 
 class Menu {
   - loggetInd : bool
