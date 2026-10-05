@@ -8,7 +8,6 @@ namespace Hydac
 {
     public class Medarbejder
     {
-
         private string brugernavn;
 
         public string Brugernavn
@@ -40,6 +39,7 @@ namespace Hydac
         {
             Console.Clear();
             Console.WriteLine("Opret Medarbejder");
+            Console.WriteLine("--------------------");
             if (Menu.erLoggetind == true)
             {
                 Console.Write("Indsæt Brugernavn: ");
@@ -59,10 +59,13 @@ namespace Hydac
         public static void ListeMedarbejder()
         {
             Console.Clear();
-            Console.WriteLine("Liste Medarbejder");
-            foreach (Medarbejder m in Medarbejder.MedarbejderListe)
+            Console.WriteLine("Liste af Medarbejder");
+            Console.WriteLine($"{"Brugernavn",-10}");
+            Console.WriteLine(new string('-', 10));
+
+            foreach (Medarbejder m in MedarbejderListe)
             {
-                Console.WriteLine($"{m.brugernavn}");
+                Console.WriteLine($"{m.Brugernavn,-10}");
             }
         }
 
@@ -70,6 +73,7 @@ namespace Hydac
         {
             Console.Clear();
             Console.WriteLine("Log ind");
+            Console.WriteLine("--------------------");
             if (Menu.erLoggetind == false)
             {
                 Console.Write("Indtast Brugernavn: ");
@@ -83,6 +87,7 @@ namespace Hydac
                     if (m.brugernavn == brugernavn && m.kode == kode)
                     {
                         Menu.erLoggetind = true;
+                        Menu.aktivMedarbejder = brugernavn;
                     }
                     else
                         Menu.erLoggetind = false;
