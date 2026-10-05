@@ -21,6 +21,7 @@ namespace Hydac
                 Console.WriteLine("4. Vis medarbejder");
                 Console.WriteLine("5. Vis besøg");
                 Console.WriteLine("6. Tjek Ind");
+                Console.WriteLine("7. Tjek Ud");
                 Console.WriteLine("--------------------");
                 Console.Write(aktivMedarbejder + " > ");
                 string? svar = Console.ReadLine();
@@ -51,6 +52,18 @@ namespace Hydac
                         break;
                     case "5":
                         Besøg.ListeBesøg();
+                        Console.ReadLine();
+                        break;
+                    case "6":
+                        Console.Clear();
+                        Besøg.TjekInd();
+                        Console.Write("Enter for at komme tilbage...");
+                        Console.ReadLine();
+                        break;
+                    case "7":
+                        Console.Clear();
+                        Besøg.TjekUd();
+                        Console.Write("Enter for at komme tilbage...");
                         Console.ReadLine();
                         break;
                     default:
