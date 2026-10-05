@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace Hydac
 {
     public class Besøg
@@ -16,11 +17,7 @@ namespace Hydac
         public int IndtjekningsKode { get; set; }
         public string Status { get; set; }
         public bool Sikkerhedsfolder { get; set; }
-
         
-
-
-
         public Besøg(string navn, string firma, string ansvarlig, DateTime forventetAnkomst, DateTime forventetAfgang, string lokale, int indtjekningsKode, string status, bool sikkerhedsfolder)
         {
             Navn = navn;
@@ -34,7 +31,9 @@ namespace Hydac
             Sikkerhedsfolder = sikkerhedsfolder;
         }
 
-        public static List<Besøg> BesøgListe = new List<Besøg>();
+        public static List<Besøg> BesøgListe = new List<Besøg> {
+            new Besøg("Mikkel", "Mikkels firma", "John ansvarlig", new DateTime(2026,10,08,12,00,00), new DateTime(2026,10,08,17,00,00), "XC01", 29253699, "Ikke Tjekket Ind", false)
+        };
         
         public static void AddBesøg()
         {
@@ -58,7 +57,19 @@ namespace Hydac
             string status = "Ikke Tjekket Ind";
             bool sikkerhedsfolder = false;
             BesøgListe.Add(new Besøg(navn, firma, ansvarlig, forventetankomst, forventetafgang, lokale, indtjekningskode, status, sikkerhedsfolder));
+        }
 
+        public static void ListeBesøg()
+        {
+            Console.Clear();
+            Console.WriteLine("Liste Besøg");
+            Console.WriteLine($"{"Navn",-12}{"Firma",-18}{"Ankomst",-8}{"Afgang",-8}{"Lokale",-8}{"Ansvarlig",-16}{"Status",-18}{"Kode",-10}{"Sikkerhedsfolder",-16}");
+            Console.WriteLine(new string('-', 98+16));
+
+            foreach (Besøg b in BesøgListe)
+            {
+                Console.WriteLine($"{b.Navn,-12}{b.Firma,-18}{b.ForventetAnkomst,-8:HH:mm}{b.ForventetAfgang,-8:HH:mm}{b.Lokale,-8}{b.Ansvarlig,-16}{b.Status,-18}{b.IndtjekningsKode,-10}{b.Sikkerhedsfolder,-16}");
+            }
         }
     }
 }
