@@ -20,6 +20,7 @@ namespace Hydac
                 Console.WriteLine("3. Opret medarbejder");
                 Console.WriteLine("4. Vis medarbejder");
                 Console.WriteLine("5. Vis besøg");
+                Console.WriteLine("6. Tjek Ind");
                 Console.WriteLine("--------------------");
                 Console.Write(aktivMedarbejder + " > ");
                 string? svar = Console.ReadLine();
