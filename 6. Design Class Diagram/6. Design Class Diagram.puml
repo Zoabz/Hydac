@@ -8,7 +8,7 @@ skinparam linetype ortho
 skinparam nodesep 80
 skinparam ranksep 80
 skinparam class {
-  BackgroundColor White
+  BackgroundColor white
   BorderColor #555555
   }
 
