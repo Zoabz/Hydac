@@ -12,10 +12,14 @@ namespace Hydac
         {
             while (true)
             {
+                // Vis menuen
                 Console.Clear();
                 Console.WriteLine("Hydac Komme-Gå-System");
                 Console.WriteLine("--------------------");
-                Console.WriteLine("1. Login");
+                if (!Menu.erLoggetind)
+                    Console.WriteLine("1. Login");
+                else
+                    Console.WriteLine("1. Log ud");
                 Console.WriteLine("2. Opret besøg");
                 Console.WriteLine("3. Opret medarbejder");
                 Console.WriteLine("4. Vis medarbejder");
@@ -23,48 +27,36 @@ namespace Hydac
                 Console.WriteLine("6. Tjek Ind");
                 Console.WriteLine("7. Tjek Ud");
                 Console.WriteLine("--------------------");
+
+                // Input fra aktøren
                 Console.Write(aktivMedarbejder + " > ");
+
+                // Menu valg
                 string? svar = Console.ReadLine();
                 switch (svar) {
                     case "1":
-                        Medarbejder.Login();
-                        Console.Write("Enter for at komme tilbage...");
-                        Console.ReadLine();
+                        if (!Menu.erLoggetind)
+                            Medarbejder.Login();
+                        else
+                            Medarbejder.LogOut();
                         break;
                     case "2":
                         Besøg.AddBesøg();
                         break;
                     case "3":
-                        Console.Clear();
                         Medarbejder.OpretMedarbejder();
-                        Console.WriteLine();
-                        Console.WriteLine();
-                        Console.Write("Enter for at komme tilbage...");
-                        Console.ReadLine();
                         break;
                     case "4":
-                        Console.Clear();
                         Medarbejder.ListeMedarbejder();
-                        Console.WriteLine();
-                        Console.WriteLine();
-                        Console.Write("Enter for at komme tilbage...");
-                        Console.ReadLine();
                         break;
                     case "5":
                         Besøg.ListeBesøg();
-                        Console.ReadLine();
                         break;
                     case "6":
-                        Console.Clear();
                         Besøg.TjekInd();
-                        Console.Write("Enter for at komme tilbage...");
-                        Console.ReadLine();
                         break;
                     case "7":
-                        Console.Clear();
                         Besøg.TjekUd();
-                        Console.Write("Enter for at komme tilbage...");
-                        Console.ReadLine();
                         break;
                     default:
                         Console.Clear();
