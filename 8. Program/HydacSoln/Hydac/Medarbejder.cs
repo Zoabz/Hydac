@@ -37,11 +37,11 @@ namespace Hydac
 
         public static void OpretMedarbejder()
         {
-            Console.Clear();
-            Console.WriteLine("Opret Medarbejder");
-            Console.WriteLine("--------------------");
             if (Menu.erLoggetind == true)
             {
+                Console.Clear();
+                Console.WriteLine("Opret Medarbejder");
+                Console.WriteLine("--------------------");
                 Console.Write("Indsæt Brugernavn: ");
                 string? brugernavn = Console.ReadLine();
                 Console.Write("Indsæt Kode: ");
@@ -53,20 +53,28 @@ namespace Hydac
             }
             else
                 Console.WriteLine("Du skal være logget ind!");
-            
+            Console.ReadLine();
         }
 
         public static void ListeMedarbejder()
         {
-            Console.Clear();
-            Console.WriteLine("Liste af Medarbejder");
-            Console.WriteLine($"{"Brugernavn",-10}");
-            Console.WriteLine(new string('-', 10));
+            if (Menu.erLoggetind) { 
+                Console.Clear();
+                Console.WriteLine("Liste af Medarbejder");
+                Console.WriteLine($"{"Brugernavn",-10}");
+                Console.WriteLine(new string('-', 10));
 
-            foreach (Medarbejder m in MedarbejderListe)
-            {
-                Console.WriteLine($"{m.Brugernavn,-10}");
+                foreach (Medarbejder m in MedarbejderListe)
+                {
+                    Console.WriteLine($"{m.Brugernavn,-10}");
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.Write("Enter for at komme tilbage...");
             }
+            else
+                Console.WriteLine("Du skal være logget ind!");
+                Console.ReadLine();
         }
 
         public static void Login()
@@ -103,8 +111,17 @@ namespace Hydac
             }
             else
                 Console.WriteLine("Du er allerede logget ind");
+            Console.Write("Enter for at komme tilbage...");
+            Console.ReadLine();
         }
         
+        public static void LogOut()
+        {
+            Menu.erLoggetind = false;
+            Console.WriteLine("Du er logget ud!");
+            Console.ReadLine();
+            Menu.aktivMedarbejder = "";
+        }
 
 
 

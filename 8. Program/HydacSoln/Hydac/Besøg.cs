@@ -36,69 +36,49 @@ namespace Hydac
         }
 
         public static List<Besøg> BesøgListe = new List<Besøg>();
-        
+
         public static void AddBesøg()
         {
-            Console.WriteLine("Opret Besøg");
-            Console.Write("Indtast Navn: ");
-            string? navn = Console.ReadLine();
-            Console.Write("Indtast Firma: ");
-            string? firma = Console.ReadLine();
-            Console.Write("Indtast Forventet Ankomst: ");
-            DateTime forventetankomst = Convert.ToDateTime(Console.ReadLine());
-            Console.Write("Indtast Forventet Afgang: ");
-            DateTime forventetafgang = Convert.ToDateTime(Console.ReadLine());
-            Console.Write("Indtast Lokale: ");
-            string? lokale = Console.ReadLine();
-            Console.Write("Indtast Ansvarlig: ");
-            string? ansvarlig = Console.ReadLine();
+            if (Menu.erLoggetind == true)
+            {
+                Console.WriteLine("Opret Besøg");
+                Console.Write("Indtast Navn: ");
+                string? navn = Console.ReadLine();
+                Console.Write("Indtast Firma: ");
+                string? firma = Console.ReadLine();
+                Console.Write("Indtast Forventet Ankomst: ");
+                DateTime forventetankomst = Convert.ToDateTime(Console.ReadLine());
+                Console.Write("Indtast Forventet Afgang: ");
+                DateTime forventetafgang = Convert.ToDateTime(Console.ReadLine());
+                Console.Write("Indtast Lokale: ");
+                string? lokale = Console.ReadLine();
+                Console.Write("Indtast Ansvarlig: ");
+                string? ansvarlig = Console.ReadLine();
 
-            Random rnd = new Random();
-            int indtjekningskode = rnd.Next(10_000_000, 100_000_000);
+                Random rnd = new Random();
+                int indtjekningskode = rnd.Next(10_000_000, 100_000_000);
 
-            DateTime indtjektid = Convert.ToDateTime(null);
-            DateTime udtjektid = Convert.ToDateTime(null);
-            string status = "Ikke Tjekket Ind";
-            bool sikkerhedsfolder = false;
-            BesøgListe.Add(new Besøg(navn, firma, ansvarlig, forventetankomst, forventetafgang, indtjektid,udtjektid, lokale, indtjekningskode, status, sikkerhedsfolder));
+                DateTime indtjektid = Convert.ToDateTime(null);
+                DateTime udtjektid = Convert.ToDateTime(null);
+                string status = "Ikke Tjekket Ind";
+                bool sikkerhedsfolder = false;
+                BesøgListe.Add(new Besøg(navn, firma, ansvarlig, forventetankomst, forventetafgang, indtjektid, udtjektid, lokale, indtjekningskode, status, sikkerhedsfolder));
+            }
+            else {
+                Console.WriteLine("Du skal være logget ind!");
+                Console.ReadLine();
+            }
+                
         }
 
         public static void ListeBesøg()
         {
-            Console.Clear();
-            Console.WriteLine("Liste Besøg");
-            foreach(Besøg i in BesøgListe)
+            if (Menu.erLoggetind)
             {
-                if(i.Status == "Ikke Tjekket Ind")
-                {
-                    Console.WriteLine($"{"Navn",-12}" +
-                        $"{"Firma",-18}" +
-                        $"{"Ankomst",-8}" +
-                        $"{"Afgang",-8}" +
-                        $"{"Lokale",-8}" +
-                        $"{"Ansvarlig",-16}" +
-                        $"{"Status",-18}" +
-                        $"{"Kode",-10}" +
-                        $"{"Sikkerhedsfolder",-16}");
-                    Console.WriteLine(new string('-', 114));
-                }
-                else if(i.Status == "Tjekket Ind")
-                {
-                        Console.WriteLine($"{"Navn",-12}" +
-                            $"{"Firma",-18}" +
-                            $"{"Ankomst",-8}" +
-                            $"{"Afgang",-8}" +
-                            $"{"Lokale",-8}" +
-                            $"{"Ansvarlig",-16}" +
-                            $"{"Status",-18}" +
-                            $"{"Indtjekningstid",-18}" +
-                            $"{"Kode",-10}" +
-                            $"{"Sikkerhedsfolder",-16}");
-                        Console.WriteLine(new string('-', 132));
-                }
-                else
-                {
-                    Console.WriteLine($"{"Navn",-12}" +
+                Console.Clear();
+                Console.WriteLine("Liste Besøg");
+                // Header
+                Console.WriteLine($"{"Navn",-12}" +
                         $"{"Firma",-18}" +
                         $"{"Ankomst",-8}" +
                         $"{"Afgang",-8}" +
@@ -109,35 +89,64 @@ namespace Hydac
                         $"{"Udtjekningstid",-18}" +
                         $"{"Kode",-10}" +
                         $"{"Sikkerhedsfolder",-16}");
-                    Console.WriteLine(new string('-', 150));
+                Console.WriteLine(new string('-', 150));
+
+
+                foreach (Besøg b in BesøgListe)
+                {
+                    if (b.Status == "Ikke Tjekket Ind")
+                    {
+                        Console.WriteLine($"{b.Navn,-12}" +
+                            $"{b.Firma,-18}" +
+                            $"{b.ForventetAnkomst,-8:HH:mm}" +
+                            $"{b.ForventetAfgang,-8:HH:mm}" +
+                            $"{b.Lokale,-8}" +
+                            $"{b.Ansvarlig,-16}" +
+                            $"{b.Status,-54}" +
+                            $"{b.IndtjekningsKode,-10}" +
+                            $"{b.Sikkerhedsfolder,-16}");
+
+                    }
+                    else if (b.Status == "Tjekket Ind")
+                    {
+                        Console.WriteLine($"{b.Navn,-12}" +
+                            $"{b.Firma,-18}" +
+                            $"{b.ForventetAnkomst,-8:HH:mm}" +
+                            $"{b.ForventetAfgang,-8:HH:mm}" +
+                            $"{b.Lokale,-8}" +
+                            $"{b.Ansvarlig,-16}" +
+                            $"{b.Status,-18}" +
+                            $"{b.IndTjekTid,-36:HH:mm}" +
+                            $"{b.IndtjekningsKode,-10}" +
+                            $"{b.Sikkerhedsfolder,-16}");
+
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{b.Navn,-12}" +
+                            $"{b.Firma,-18}" +
+                            $"{b.ForventetAnkomst,-8:HH:mm}" +
+                            $"{b.ForventetAfgang,-8:HH:mm}" +
+                            $"{b.Lokale,-8}" +
+                            $"{b.Ansvarlig,-16}" +
+                            $"{b.Status,-18}" +
+                            $"{b.IndTjekTid,-18:HH:mm}" +
+                            $"{b.UdTjekTid,-18:HH:mm}" +
+                            $"{b.IndtjekningsKode,-10}" +
+                            $"{b.Sikkerhedsfolder,-16}");
+
+                    }
                 }
-                
             }
+            else
+                Console.WriteLine("Du skal være logget ind!");
+            Console.ReadLine();
 
-
-            foreach (Besøg b in BesøgListe)
-            {
-                if (b.Status == "Ikke Tjekket Ind")
-                {
-                    Console.WriteLine($"{b.Navn,-12}{b.Firma,-18}{b.ForventetAnkomst,-8:HH:mm}{b.ForventetAfgang,-8:HH:mm}{b.Lokale,-8}{b.Ansvarlig,-16}{b.Status,-18}{b.IndtjekningsKode,-10}{b.Sikkerhedsfolder,-16}");
-
-                }
-                else if (b.Status == "Tjekket Ind")
-                {
-                    Console.WriteLine($"{b.Navn,-12}{b.Firma,-18}{b.ForventetAnkomst,-8:HH:mm}{b.ForventetAfgang,-8:HH:mm}{b.Lokale,-8}{b.Ansvarlig,-16}{b.Status,-18}{b.IndTjekTid,-18:HH:mm}{b.IndtjekningsKode,-10}{b.Sikkerhedsfolder,-16}");
-
-                }
-                else
-                {
-                    Console.WriteLine($"{b.Navn,-12}{b.Firma,-18}{b.ForventetAnkomst,-8:HH:mm}{b.ForventetAfgang,-8:HH:mm}{b.Lokale,-8}{b.Ansvarlig,-16}{b.Status,-18}{b.IndTjekTid,-18:HH:mm}{b.UdTjekTid,-18:HH:mm}{b.IndtjekningsKode,-10}{b.Sikkerhedsfolder,-16}");
-
-                }
-            }
         }
 
         public static void TjekInd()
         {
-
+            Console.Clear();
             Console.Write("Indsæt indtjekningskode: ");
             if (!int.TryParse(Console.ReadLine(), out int indtjekningskode)) {
                 Console.Clear();
@@ -151,13 +160,22 @@ namespace Hydac
                     Console.Clear();
                     b.Status = "Tjekket Ind";
                     b.IndTjekTid = DateTime.Now;
+                    Console.Write("Har du modtaget sikkerhedsfolder? ja/nej: ");
+                    string? svar = Console.ReadLine().ToLower();
+                    if (svar == "ja")
+                        b.Sikkerhedsfolder = true;
+                    else
+                        b.Sikkerhedsfolder = false;
 
                 }
             }
+            Console.Write("Enter for at komme tilbage...");
+            Console.ReadLine();
         }
 
         public static void TjekUd()
         {
+            Console.Clear();
             Console.Write("Indsæt indtjekningskode: ");
             if (!int.TryParse(Console.ReadLine(), out int indtjekningskode))
             {
@@ -175,6 +193,8 @@ namespace Hydac
 
                 }
             }
+            Console.Write("Enter for at komme tilbage...");
+            Console.ReadLine();
         }
     }
     }
