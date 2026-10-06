@@ -39,8 +39,10 @@ namespace Hydac
 
         public static void AddBesøg()
         {
+            
             if (Menu.erLoggetind == true)
             {
+                Console.Clear();
                 Console.WriteLine("Opret Besøg");
                 Console.Write("Indtast Navn: ");
                 string? navn = Console.ReadLine();
