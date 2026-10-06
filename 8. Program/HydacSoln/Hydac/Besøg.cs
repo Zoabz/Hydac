@@ -80,7 +80,7 @@ namespace Hydac
                 Console.Clear();
                 Console.WriteLine("Liste Besøg");
                 Console.WriteLine($"{"Navn",-12}" +
-                        $"{"Firma",-14}" +
+                        $"{"Firma",-15}" +
                         $"{"Ankomst",-8}" +
                         $"{"Afgang",-8}" +
                         $"{"Lokale",-8}" +
@@ -97,7 +97,7 @@ namespace Hydac
                 foreach (Besøg b in BesøgListe)
                 {
                     Console.WriteLine($"{b.Navn,-12}" +
-                        $"{b.Firma,-14}" +
+                        $"{b.Firma,-15}" +
                         $"{b.ForventetAnkomst,-8:HH:mm}" +
                         $"{b.ForventetAfgang,-8:HH:mm}" +
                         $"{b.Lokale,-8}" +
