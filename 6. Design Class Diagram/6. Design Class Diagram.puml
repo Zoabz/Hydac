@@ -1,69 +1,75 @@
 @startuml
-title Hydac Designklassediagram
+title HYDAC Designklassediagram
 
 hide circle
 hide empty members
+
 skinparam classAttributeIconSize 0
 skinparam linetype ortho
 skinparam nodesep 80
 skinparam ranksep 80
+
 skinparam class {
-  BackgroundColor white
-  BorderColor #555555
-  }
+    BackgroundColor white
+    BorderColor #555555
+}
 
 class Menu {
-  - loggetInd : bool
-  - medarbejdere : List<Medarbejder>
-  - besøgsListe : List<Besøg>
-  --
-  + VisMenu() : void
-  - Login() : void
-  - OpretMedarbejder() : void
-  - OpretBesøg() : void
-  - VisMedarbejderListe() : void
-  - VisGæsteListe() : void
-  - TjekIndUd() : void
+    - ErloggetInd : bool
+    - medarbejdere : List<Medarbejder>
+    - besøgsListe : List<Besøg>
+    --
+     + __VisMenu() : void__
+    - Login() : void
+    - __OpretMedarbejder() : void__
+    - __OpretBesøg() : void__
+    - __VisMedarbejderListe() : void__
+    - __VisGæsteListe() : void__
+    - __TjekInd() : void__
+    - __TjekUd() : void__
 }
+
 
 class Medarbejder {
-  - brugernavn : string
-  - kode : string
-  --
-  + Medarbejder(brugernavn : string, kode : string)
-  + TjekKode(kode : string) : bool
+    + Brugernavn : string
+    - Kode : string
+    --
+    + Medarbejder(Brugernavn : string, kode : string)
+    + TjekKode(kode : string) : bool
 }
 
-class Gæst {
-  - navn : string
-  - firma : string
-  --
-  + Gæst(navn : string, firma : string)
-  + GetNavn() : string
-}
 
 class Besøg {
-  + Gæst : Gæst
-  + Firma : Firma
-  + Ansvarlig : Medarbejder
-  + ForventetAnkomst : DateTime
-  + ForventetAfgang : DateTime
-  + Lokale : string
-  + Indtjekningskode : int
-  + Status : bool
-  + SikkerhedsfolderModtaget : bool
-  --
-  + Besøg(gæst : Gæst, ansvarlig : Medarbejder, forventetAnkomst : DateTime,\n forventetAfgang : DateTime, lokale : string)
-  + TjekInd(sikkerhedsfolderModtaget : bool) : void
-  + TjekUd() : void
-  + GetIndtjekningskode() : int
-  + GetStatus() : string
-}
+    + Gæst : string
+    + Firma : string
+    + Ansvarlig : Medarbejder
+    + Lokale : string
+    + Dato : DateTime
+    + ForventetAnkomst : DateTime
+    + ForventetAfgang : DateTime
+    + tjekketIndTidspunkt : DateTime?
+    + tjekketUdTidspunkt : DateTime?
+    + Indtjekningskode : int
+    + Status : string
+    + SikkerhedsfolderModtaget : bool
+    --
+    + Besøg(
+        Navn : Gæst,
+        ansvarlig : Medarbejder,
+        dato : DateTime,
+        forventetAnkomst : DateTime,
+        forventetAfgang : DateTime
+    )
+    + TjekInd(sikkerhedsfolderModtaget : bool) : void
+    + TjekUd() : void
+  }
 
 Menu "1" -- "1..*" Medarbejder : medarbejdere
 Menu "1" -- "0..*" Besøg : besøgsListe
 
-Besøg "0..*" -- "1" Medarbejder : ansvarlig
-Besøg "0..*" -- "1" Gæst : gæst
+Besøg "1" -- "1" Medarbejder : ansvarlig
+
+
+
 
 @enduml
