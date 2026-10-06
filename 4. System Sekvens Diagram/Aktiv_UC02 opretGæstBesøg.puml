@@ -5,9 +5,8 @@ title UC02 - Opret Gæstebesøg
 actor Medarbejder
 participant ":System" as System
 
-loop for hver gæst
   Medarbejder -> System : Opret Besøg (navn, firma, ank/afg tidspunkt, dato, ansvarlig)
   System --> Medarbejder : Besøg tilføjet
-end
 @enduml
+
 
