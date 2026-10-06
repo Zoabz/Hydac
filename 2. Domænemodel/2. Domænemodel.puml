@@ -1,45 +1,64 @@
-@startuml
+@startuml Hydac_Domaenemodel_v2
+
+skinparam backgroundColor White
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam roundCorner 8
+skinparam linetype polyline
+skinparam nodesep 110
+skinparam ranksep 70
+skinparam padding 3
+skinparam titleFontStyle bold
 
 hide circle
+hide methods
 
-
-class Besøg
-{
-  besøg
-  dato
-  forventet ankomst
-  forventet afrejse
+skinparam class {
+    BackgroundColor White
+    BorderColor #BBBBBB
+    ArrowColor #444444
+    FontColor Black
+    AttributeFontColor Black
 }
 
-class Medarbejder
-{
-  medarbejder
-  navn
+title Hydac Domænemodel
+
+class "Medarbejder" as Medarbejder {
+    brugernavn
+    kode
 }
 
-class Gæst
-{
-  gæstID
-  navn
-  firma
+class "Besøg" as Besog {
+    dato
+    forventet ankomst tid
+    forventet afgangs tid
+    lokale
+    status
+    indtjekningskode
 }
 
-class Indtjekning{
-  tidspunkt
-  sikkerhedsfolder modtaget
+class "Gæst" as Gaest {
+    navn
+    firma
+}
+
+class "Indtjekning" as Indtjekning {
+    indtjeknings tid
+    sikkerhedsfolder modtagelse
+}
+
+class "Udtjekning" as Udtjekning {
+    udtjeknings tid
 }
 
 
-class Udtjekning{
-  tidspunkt
-}
 
+Medarbejder "1" -right- "0..*" Besog : ansvarlig for
+Besog "1" -right- "1" Gaest : omfatter
 
+Besog "1" -- "0..1" Indtjekning : registreres ved
+Besog "1" -- "0..1" Udtjekning : afsluttes ved
 
-Medarbejder "1" - "1" Besøg 
-Besøg "1" - "1" Gæst 
-Besøg "1" -- "0..1" Indtjekning 
-Besøg "1" -- "0..1" Udtjekning
-
+Indtjekning -[hidden]right- Udtjekning
 
 @enduml
