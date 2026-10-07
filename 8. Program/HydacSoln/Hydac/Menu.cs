@@ -53,10 +53,10 @@ namespace Hydac
                         Besøg.ListeBesøg();
                         break;
                     case "6":
-                        Besøg.TjekInd();
+                        Besøg.TjekGæstInd();
                         break;
                     case "7":
-                        Besøg.TjekUd();
+                        Besøg.TjekGæstUd();
                         break;
                     default:
                         Console.Clear();

@@ -47,10 +47,6 @@ class "i1: Indtjekning" as Indtjekning {
     sikkerhedsfolder modtaget = "Ja"
 }
 
-note right of Indtjekning
-    b1 er tjekket ind, men ikke tjekket ud.
-    Derfor findes der endnu ingen Udtjekning (0..1).
-end note
 
 Medarbejder "1" -right- "0..*" Besog : ansvarlig for
 Besog "1" -right- "1" Gaest : omfatter
