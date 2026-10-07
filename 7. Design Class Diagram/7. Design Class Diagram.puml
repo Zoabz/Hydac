@@ -5,94 +5,70 @@ hide circle
 hide empty members
 
 skinparam classAttributeIconSize 0
-skinparam pageMargin 40
-left to right direction
-skinparam nodesep 40
-skinparam ranksep 100
-
-skinparam rectangle {
-    BackgroundColor white
-    BorderColor #BBBBBB
-}
+skinparam nodesep 80
+skinparam ranksep 80
 
 skinparam class {
     BackgroundColor white
     BorderColor #555555
 }
 
-rectangle " " as bakgrund {
-
-class Program <<internal>> {
-    - {static} Main(args : string[]) : void
+class Program {
+    ~ Main(args : string[]) : void
 }
 
-
-class Menu {
-    + {static} erLoggetInd : bool
-    + {static} aktivMedarbejder : string = ""
+class Menu <<static>> {
+    + erLoggetind : bool
+    + aktivMedarbejder : string = ""
     --
-    + {static} MenuShow() : void
+    + MenuShow() : void
 }
-
 
 class Medarbejder {
     - brugernavn : string
     - kode : string
     + Brugernavn : string
     + Kode : string
-    + {static} medarbejderliste : List<Medarbejder>
+    + MedarbejderListe : List<Medarbejder>
     --
     + Medarbejder(brugernavn : string, kode : string)
-    + {static} OpretMedarbejder() : void
-    + {static} VisMedarbejderliste() : void
-    + {static} LogInd() : void
-    + {static} LogUd() : void
+    + OpretMedarbejder() : void
+    + ListeMedarbejder() : void
+    + Login() : void
+    + LogOut() : void
 }
-
 
 class Besøg {
-    + GæstNavn : string
+    + Navn : string
     + Firma : string
     + Ansvarlig : string
+    + ForventetAnkomst : DateTime
+    + ForventetAfgang : DateTime
+    + IndTjekTid : DateTime?
+    + UdTjekTid : DateTime?
     + Lokale : string
-    + Dato : DateTime?
-    + ForventetAnkomsttid : DateTime
-    + ForventetAfgangstid : DateTime
-    + Indtjekningstid : DateTime?
-    + Udtjekningstid : DateTime?
-    + Indtjekningskode : int
+    + IndtjekningsKode : int
     + Status : string
-    + SikkerhedsfolderModtaget : bool
-    + {static} gæsteliste : List<Besøg>
+    + Sikkerhedsfolder : bool
+    + Date : DateTime?
+    + BesøgListe : List<Besøg>
     --
-    + Besøg(
-        gæstNavn : string,
-        firma : string,
-        ansvarlig : string,
-        forventetAnkomsttid : DateTime,
-        forventetAfgangstid : DateTime,
-        dato : DateTime?,
-        indtjekningstid : DateTime?,
-        udtjekningstid : DateTime?,
-        lokale : string,
-        indtjekningskode : int,
-        status : string,
-        sikkerhedsfolderModtaget : bool
-    )
-    - {static} LæsDato(i : string) : DateTime
-    + {static} OpretBesøg() : void
-    + {static} VisGæsteliste() : void
-    + {static} FindBesøg(indtjekningskode : int) : Besøg?
-    + {static} TjekInd() : void
-    + {static} TjekGæstUd() : void
-    + TjekInd(sikkerhedsfolderModtaget : bool) : void
+    + Besøg(navn : string, firma : string, ansvarlig : string,
+        forventetAnkomst : DateTime, forventetAfgang : DateTime,
+        date : DateTime?, indtjektid : DateTime?, udtjektid : DateTime?,
+        lokale : string, indtjekningsKode : int, status : string,
+        sikkerhedsfolder : bool)
+    + AddBesøg() : void
+    + ListeBesøg() : void
+    + TjekInd(sikkerhedsfolder : bool) : void
     + TjekUd() : void
+    + FindBesøg(indtjekningskode : int) : Besøg?
+    + TjekGæstInd() : void
+    + TjekGæstUd() : void
 }
+Program -- Menu 
+Menu -- Besøg 
+Menu -- Medarbejder
 
-Program "1" -- "1" Menu : starter
-Menu "1" -- "0..*" Besøg : besøgsListe
-Menu "1  " - "1..*  " Medarbejder :   medarbejdere
-Medarbejder "1" -- "1" Besøg : ansvarlige
-}
 
 @enduml

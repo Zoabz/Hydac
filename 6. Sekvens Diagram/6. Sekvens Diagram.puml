@@ -6,44 +6,33 @@ skinparam SequenceLifeLineBackgroundColor white
 skinparam SequenceGroupBackgroundColor white
 title SD: UC02 Opret besøg
 
-participant "Menu" as M
-participant "Besøg" as K
+participant "menu : Menu" as M
 participant "gæsteliste : List<Besøg>" as L
 
-[-> M : MenuShow()
+[-> M : OpretBesøg()
 activate M
-note over M : svar = "2"
 
-M -> K : OpretBesøg()
-activate K
-
-alt Menu.erLoggetInd
-    note over K
-        gæstNavn, firma, lokale og ansvarlig
-        indlæses fra konsollen
+opt erLoggetInd
+    note over M
+        gæstNavn, firma, dato, forventetAnkomsttid,
+        forventetAfgangstid, lokale og ansvarligs
+        brugernavn indlæses fra konsollen
     end note
 
-    K -> K : dato = LæsDato("Indtast Dato: ")
-    K -> K : forventetAnkomsttid = LæsDato("Indtast Forventet Ankomsttid: ")
-    K -> K : forventetAfgangstid = LæsDato("Indtast Forventet Afgangstid: ")
-    K -> K : indtjekningskode = Random.Next(10_000_000, 100_000_000)
+    M -> M : ansvarlig = FindMedarbejder(brugernavn)
+    M -> M : indtjekningskode = GenererIndtjekningskode()
 
     create participant "b : Besøg" as B
-    K -> B : create(gæstNavn, firma, ansvarlig, forventetAnkomsttid,\nforventetAfgangstid, dato, indtjekningstid, udtjekningstid,\nlokale, indtjekningskode, status, sikkerhedsfolderModtaget)
+    M -> B : create(gæstNavn, firma, ansvarlig, dato,\nforventetAnkomsttid, forventetAfgangstid,\nlokale, indtjekningskode)
     activate B
     rnote over B
-        status = "Ikke Tjekket Ind"
-        sikkerhedsfolderModtaget = false
-        indtjekningstid = udtjekningstid = DateTime.MinValue
+        Status = "Ikke Tjekket Ind"
+        SikkerhedsfolderModtaget = false
     end rnote
     deactivate B
 
-    K -> L : Add(b)
-else ikke logget ind
-    note over K : "Du skal være logget ind!"
+    M -> L : Add(b)
 end
-
-K --> M
-deactivate K
+[<-- M
 deactivate M
 @enduml
