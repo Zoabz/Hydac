@@ -1,5 +1,7 @@
 @startuml
 skinparam style strictuml
+skinparam ParticipantBackgroundColor white
+skinparam ActorBackgroundColor white
 title UC03 - Vis medarbejderliste
 
 actor Medarbejder
