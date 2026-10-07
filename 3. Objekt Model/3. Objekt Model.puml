@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @startuml Hydac_Domaenemodel_v2
+=======
+@startuml Hydac_Objektmodel
+>>>>>>> d0c158597ab168f24ce868f354b8876fd62e41d2
 
 skinparam backgroundColor White
 skinparam shadowing false
@@ -29,9 +33,15 @@ class "m1: Medarbejder" as Medarbejder {
 }
 
 class "b1: Besøg" as Besog {
+<<<<<<< HEAD
     dato = "30/09/2026"
     forventet ankomst tid = "12:00"
     forventet afgangs tid = "16:00"
+=======
+    dato = "30-09-2026"
+    forventet ankomsttid = "12:00"
+    forventet afgangstid = "16:00"
+>>>>>>> d0c158597ab168f24ce868f354b8876fd62e41d2
     lokale = "X01"
     status = "Tjekket Ind"
     indtjekningskode = "81507192"
@@ -43,6 +53,7 @@ class "g1: Gæst" as Gaest {
 }
 
 class "i1: Indtjekning" as Indtjekning {
+<<<<<<< HEAD
     indtjeknings tid = "12:05"
     sikkerhedsfolder modtagelse = "Ja"
 }
@@ -61,4 +72,20 @@ Besog "1" -- "0..1" Udtjekning : afsluttes ved
 
 Indtjekning -[hidden]right- Udtjekning
 
+=======
+    indtjekningstid = "12:05"
+    sikkerhedsfolder modtaget = "Ja"
+}
+
+note right of Indtjekning
+    b1 er tjekket ind, men ikke tjekket ud.
+    Derfor findes der endnu ingen Udtjekning (0..1).
+end note
+
+Medarbejder "1" -right- "0..*" Besog : ansvarlig for
+Besog "1" -right- "1" Gaest : omfatter
+
+Besog "1" -- "0..1" Indtjekning : registreres ved
+
+>>>>>>> d0c158597ab168f24ce868f354b8876fd62e41d2
 @enduml

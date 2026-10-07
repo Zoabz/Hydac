@@ -43,3 +43,9 @@ packages/
 .DS_Store
 Thumbs.db
 desktop.ini
+<<<<<<< HEAD
+=======
+
+# Word-låsefiler (oprettes når et dokument er åbent)
+~$*
+>>>>>>> d0c158597ab168f24ce868f354b8876fd62e41d2

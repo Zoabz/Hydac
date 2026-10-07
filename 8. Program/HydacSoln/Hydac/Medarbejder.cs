@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -125,5 +126,27 @@ namespace Hydac
 
 
 
+=======
+using System;
+
+namespace Hydac
+{
+    // Domæneklasse. Koden er privat og kan kun kontrolleres med TjekKode.
+    public class Medarbejder
+    {
+        public string Brugernavn { get; }
+        private string kode;
+
+        public Medarbejder(string brugernavn, string kode)
+        {
+            Brugernavn = brugernavn;
+            this.kode = kode;
+        }
+
+        public bool TjekKode(string kode)
+        {
+            return this.kode == kode;
+        }
+>>>>>>> d0c158597ab168f24ce868f354b8876fd62e41d2
     }
 }

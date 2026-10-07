@@ -1,0 +1,12 @@
+@startuml
+skinparam style strictuml
+skinparam ParticipantBackgroundColor white
+skinparam ActorBackgroundColor white
+title UC01 - Opret medarbejder
+
+actor Medarbejder
+participant ":System" as System
+
+Medarbejder -> System : opretMedarbejder(brugernavn, kode)
+System --> Medarbejder : Medarbejder oprettet
+@enduml

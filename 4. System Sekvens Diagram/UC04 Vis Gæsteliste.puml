@@ -1,0 +1,12 @@
+@startuml
+skinparam style strictuml
+skinparam ParticipantBackgroundColor white
+skinparam ActorBackgroundColor white
+title UC04 - Vis gæsteliste
+
+actor Medarbejder
+participant ":System" as System
+
+Medarbejder -> System : visGæsteliste(dato)
+System --> Medarbejder : gæsteliste (navn, firma, dato, forventet ankomsttid,\nforventet afgangstid, lokale, ansvarlig, status, ...)
+@enduml
