@@ -27,7 +27,6 @@ namespace Hydac
         public Medarbejder(string brugernavn, string kode) {
             Brugernavn = brugernavn;
             Kode = kode;
-
         }
 
         
@@ -51,7 +50,6 @@ namespace Hydac
 
                 medarbejderliste.Add(new Medarbejder(brugernavn, kode));
                 Console.WriteLine("---Medarbejder oprettet---");
-                Menu.erLoggetInd = false;
             }
             else
                 Console.WriteLine("Du skal være logget ind!");

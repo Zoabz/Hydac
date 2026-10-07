@@ -35,7 +35,10 @@ namespace Hydac
             
         }
 
-        public static List<Besøg> gæsteliste = new List<Besøg>();
+        public static List<Besøg> besøgsliste = new List<Besøg>
+        {
+            new Besøg("John", "Johns firma", "Frederik", DateTime.Now, DateTime.Today, DateTime.Now, null, null, "XC01", 94502354, "Ikke Tjekket Ind", false)
+        };
 
         private static DateTime LæsDato(string i)
         {
@@ -80,7 +83,7 @@ namespace Hydac
                 DateTime udtjekningstid = DateTime.MinValue;
                 string status = "Ikke Tjekket Ind";
                 bool sikkerhedsfolderModtaget = false;
-                gæsteliste.Add(new Besøg(gæstNavn, firma, ansvarlig, forventetAnkomsttid, forventetAfgangstid, dato, indtjekningstid, udtjekningstid, lokale, indtjekningskode, status, sikkerhedsfolderModtaget));
+                besøgsliste.Add(new Besøg(gæstNavn, firma, ansvarlig, forventetAnkomsttid, forventetAfgangstid, dato, indtjekningstid, udtjekningstid, lokale, indtjekningskode, status, sikkerhedsfolderModtaget));
             }
             else
             {
@@ -89,12 +92,12 @@ namespace Hydac
             }
         }
 
-        public static void VisGæsteliste()
+        public static void VisBesøgsliste()
         {
             if (Menu.erLoggetInd)
             {
                 Console.Clear();
-                Console.WriteLine("Gæsteliste");
+                Console.WriteLine("Besøgsliste");
                 Console.WriteLine($"{"Navn",-12}" +
                         $"{"Firma",-15}" +
                         $"{"Ankomst",-8}" +
@@ -110,7 +113,7 @@ namespace Hydac
                         
                 Console.WriteLine(new string('-', 133));
 
-                foreach (Besøg b in gæsteliste)
+                foreach (Besøg b in besøgsliste)
                 {
                     Console.WriteLine($"{b.GæstNavn,-12}" +
                         $"{b.Firma,-15}" +
@@ -133,7 +136,7 @@ namespace Hydac
 
         public static Besøg? FindBesøg(int indtjekningskode)
         {
-            foreach (Besøg b in gæsteliste)
+            foreach (Besøg b in besøgsliste)
             {
                 if (b.Indtjekningskode == indtjekningskode)
                     return b;
@@ -143,42 +146,36 @@ namespace Hydac
 
         public static void TjekInd()
         {
-            Console.Clear();
             Console.Write("Indsæt indtjekningskode: ");
             if (!int.TryParse(Console.ReadLine(), out int indtjekningskode)) {
-                Console.Clear();
-                Console.WriteLine("Prøv igen");
-                Console.Write("Indsæt indtjekningskode: ");
+                Console.Write("Fandt ingen matchende kode...");
             }
             Besøg? b = FindBesøg(indtjekningskode);
             if (b != null && b.Status == "Ikke Tjekket Ind")
             {
-                Console.Clear();
                 Console.Write("Har du modtaget sikkerhedsfolder? ja/nej: ");
                 string? svar = Console.ReadLine().ToLower();
                 b.TjekInd(svar == "ja");
+                Console.Write("Enter for at komme tilbage...");
             }
-            Console.Write("Enter for at komme tilbage...");
+
             Console.ReadLine();
         }
 
         public static void TjekGæstUd()
         {
-            Console.Clear();
             Console.Write("Indsæt indtjekningskode: ");
             if (!int.TryParse(Console.ReadLine(), out int indtjekningskode))
             {
-                Console.Clear();
-                Console.WriteLine("Prøv igen");
-                Console.Write("Indsæt indtjekningskode: ");
+                Console.Write("Fandt ingen matchende kode...");
             }
             Besøg? b = FindBesøg(indtjekningskode);
             if (b != null && b.Status == "Tjekket Ind")
             {
-                Console.Clear();
                 b.TjekUd();
+                Console.WriteLine("Du er tjekket ud!");
+
             }
-            Console.Write("Enter for at komme tilbage...");
             Console.ReadLine();
         }
 

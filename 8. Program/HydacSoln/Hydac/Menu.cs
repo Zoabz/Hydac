@@ -6,8 +6,8 @@ namespace Hydac
 {
     public static class Menu
     {
-        public static bool erLoggetInd;
-        public static string aktivMedarbejder = "";
+        public static bool erLoggetInd = true;
+        public static string aktivMedarbejder = "Admin";
         public static void MenuShow()
         {
             while (true)
@@ -50,7 +50,7 @@ namespace Hydac
                         Medarbejder.VisMedarbejderliste();
                         break;
                     case "5":
-                        Besøg.VisGæsteliste();
+                        Besøg.VisBesøgsliste();
                         break;
                     case "6":
                         Besøg.TjekInd();
@@ -59,9 +59,7 @@ namespace Hydac
                         Besøg.TjekGæstUd();
                         break;
                     default:
-                        Console.Clear();
-                        Console.WriteLine("Ukendt kommando");
-                        Console.Write("Enter for at komme tilbage...");
+                        Console.Write("Ukendt kommando...");
                         Console.ReadLine();
                     break;
                 }
