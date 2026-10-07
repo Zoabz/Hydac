@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿using Hydac;
 =======
 using Hydac;
 >>>>>>> d0c158597ab168f24ce868f354b8876fd62e41d2
+=======
+﻿using Hydac;
+>>>>>>> 559636fa843e8fe17f11e68a6d600d99eb881844
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace HydacTest
@@ -10,6 +14,7 @@ namespace HydacTest
     [TestClass]
     public class BesøgTest
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
         [TestMethod]
         public void Constructor_GyldigeOplysninger_GemmerDemPåBesøget()
@@ -41,60 +46,21 @@ namespace HydacTest
                 forventetAnkomsttid, forventetAfgangstid, "X01", 81507192);
         }
 
+=======
+>>>>>>> 559636fa843e8fe17f11e68a6d600d99eb881844
         [TestMethod]
         public void Constructor_GyldigeOplysninger_GemmerDemPåBesøget()
         {
-            // Act
-            Besøg besøg = OpretBesøg();
-
-            // Assert
-            Assert.AreEqual("Søren Mortensen", besøg.GæstNavn);
-            Assert.AreEqual("Bilka", besøg.Firma);
-            Assert.AreSame(ansvarlig, besøg.Ansvarlig);
-            Assert.AreEqual(dato, besøg.Dato);
-            Assert.AreEqual(forventetAnkomsttid, besøg.ForventetAnkomsttid);
-            Assert.AreEqual(forventetAfgangstid, besøg.ForventetAfgangstid);
-            Assert.AreEqual("X01", besøg.Lokale);
-            Assert.AreEqual(81507192, besøg.Indtjekningskode);
-            Assert.AreEqual(Besøg.IkkeTjekketInd, besøg.Status);
-            Assert.IsNull(besøg.Indtjekningstid);
-            Assert.IsNull(besøg.Udtjekningstid);
-            Assert.IsFalse(besøg.SikkerhedsfolderModtaget);
-        }
-
-        [TestMethod]
-        public void Constructor_DatoIGår_KasterArgumentException()
-        {
-            DateTime iGår = DateTime.Today.AddDays(-1);
-
-            Assert.ThrowsExactly<ArgumentException>(() => new Besøg("Søren Mortensen", "Bilka", ansvarlig, iGår,
-                iGår.AddHours(12), iGår.AddHours(16), "X01", 81507192));
-        }
-
-        [TestMethod]
-        public void Constructor_AfgangstidFørAnkomsttid_KasterArgumentException()
-        {
-            Assert.ThrowsExactly<ArgumentException>(() => new Besøg("Søren Mortensen", "Bilka", ansvarlig, dato,
-                forventetAfgangstid, forventetAnkomsttid, "X01", 81507192));
-        }
-
-        [TestMethod]
-        public void Constructor_TomtNavn_KasterArgumentException()
-        {
-            Assert.ThrowsExactly<ArgumentException>(() => new Besøg("", "Bilka", ansvarlig, dato,
-                forventetAnkomsttid, forventetAfgangstid, "X01", 81507192));
-        }
-
-        [TestMethod]
-        public void TjekInd_IkkeTjekketInd_SætterStatusTidOgSikkerhedsfolder()
-        {
             // Arrange
-            Besøg besøg = OpretBesøg();
+            DateTime ankomst = new DateTime(2026, 9, 30, 12, 0, 0);
+            DateTime afgang = new DateTime(2026, 9, 30, 16, 0, 0);
 
             // Act
-            besøg.TjekInd(true);
+            Besøg besøg = new Besøg("Søren Mortensen", "Bilka", "Lars Hansen", ankomst, afgang,
+                ankomst.Date, null, null, "X01", 81507192, "Ikke Tjekket Ind", false);
 
             // Assert
+<<<<<<< HEAD
             Assert.AreEqual(Besøg.TjekketInd, besøg.Status);
             Assert.IsNotNull(besøg.Indtjekningstid);
             Assert.IsTrue(besøg.SikkerhedsfolderModtaget);
@@ -131,6 +97,12 @@ namespace HydacTest
 
             Assert.ThrowsExactly<InvalidOperationException>(() => besøg.TjekUd());
 >>>>>>> d0c158597ab168f24ce868f354b8876fd62e41d2
+=======
+            Assert.AreEqual("Søren Mortensen", besøg.Navn);
+            Assert.AreEqual(ankomst, besøg.ForventetAnkomst);
+            Assert.AreEqual(afgang, besøg.ForventetAfgang);
+            Assert.AreEqual("Ikke Tjekket Ind", besøg.Status);
+>>>>>>> 559636fa843e8fe17f11e68a6d600d99eb881844
         }
     }
 }

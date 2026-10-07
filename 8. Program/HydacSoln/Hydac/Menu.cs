@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
@@ -60,81 +61,77 @@ namespace Hydac
                         Besøg.TjekUd();
 =======
 using System;
+=======
+﻿using System;
+>>>>>>> 559636fa843e8fe17f11e68a6d600d99eb881844
 using System.Collections.Generic;
-using System.Globalization;
+using System.Text;
 
 namespace Hydac
 {
-    // Controller og UI-lag: al dialog med konsollen ligger her,
-    // domænelogikken ligger i Besøg og Medarbejder.
-    public class Menu
+    public static class Menu
     {
-        private const string Datoformat = "dd-MM-yyyy";
-        private const string Tidsformat = "HH:mm";
-
-        private bool erLoggetInd = false;
-        private Medarbejder? aktivMedarbejder = null;
-        private List<Medarbejder> medarbejderliste = new List<Medarbejder>
-        {
-            new Medarbejder("Admin", "Admin123")
-        };
-        private List<Besøg> gæsteliste = new List<Besøg>();
-        private Random rnd = new Random();
-
-        public void VisMenu()
+        public static bool erLoggetind;
+        public static string aktivMedarbejder = "";
+        public static void MenuShow()
         {
             while (true)
             {
+                // Vis menuen
                 Console.Clear();
-                Console.WriteLine("HYDAC Komme-gå-system");
+                Console.WriteLine("Hydac Komme-Gå-System");
                 Console.WriteLine("--------------------");
-                if (!erLoggetInd)
-                    Console.WriteLine("1. Log ind");
+                if (!Menu.erLoggetind)
+                    Console.WriteLine("1. Login");
                 else
                     Console.WriteLine("1. Log ud");
-                Console.WriteLine("2. Opret medarbejder");    // UC01
-                Console.WriteLine("3. Opret besøg");          // UC02
-                Console.WriteLine("4. Vis medarbejderliste"); // UC03
-                Console.WriteLine("5. Vis gæsteliste");       // UC04
-                Console.WriteLine("6. Tjek gæst ind");        // UC05
-                Console.WriteLine("7. Tjek gæst ud");         // UC06
+                Console.WriteLine("2. Opret besøg");
+                Console.WriteLine("3. Opret medarbejder");
+                Console.WriteLine("4. Vis medarbejder");
+                Console.WriteLine("5. Vis besøg");
+                Console.WriteLine("6. Tjek Ind");
+                Console.WriteLine("7. Tjek Ud");
                 Console.WriteLine("--------------------");
 
-                Console.Write(aktivMedarbejder?.Brugernavn + " > ");
+                // Input fra aktøren
+                Console.Write(aktivMedarbejder + " > ");
 
+                // Menu valg
                 string? svar = Console.ReadLine();
-                if (svar == null) // Konsollen er lukket
-                    return;
-                switch (svar)
-                {
+                switch (svar) {
                     case "1":
-                        if (!erLoggetInd)
-                            LogInd();
+                        if (!Menu.erLoggetind)
+                            Medarbejder.Login();
                         else
-                            LogUd();
+                            Medarbejder.LogOut();
                         break;
                     case "2":
-                        OpretMedarbejder();
+                        Besøg.AddBesøg();
                         break;
                     case "3":
-                        OpretBesøg();
+                        Medarbejder.OpretMedarbejder();
                         break;
                     case "4":
-                        VisMedarbejderliste();
+                        Medarbejder.ListeMedarbejder();
                         break;
                     case "5":
-                        VisGæsteliste();
+                        Besøg.ListeBesøg();
                         break;
                     case "6":
-                        TjekInd();
+                        Besøg.TjekInd();
                         break;
                     case "7":
+<<<<<<< HEAD
                         TjekUd();
 >>>>>>> d0c158597ab168f24ce868f354b8876fd62e41d2
+=======
+                        Besøg.TjekUd();
+>>>>>>> 559636fa843e8fe17f11e68a6d600d99eb881844
                         break;
                     default:
                         Console.Clear();
                         Console.WriteLine("Ukendt kommando");
+<<<<<<< HEAD
 <<<<<<< HEAD
                         Console.Write("Enter for at komme tilbage...");
                         Console.ReadLine();
@@ -466,5 +463,13 @@ namespace Hydac
             Console.ReadLine();
         }
 >>>>>>> d0c158597ab168f24ce868f354b8876fd62e41d2
+=======
+                        Console.Write("Enter for at komme tilbage...");
+                        Console.ReadLine();
+                    break;
+                }
+            }
+        }
+>>>>>>> 559636fa843e8fe17f11e68a6d600d99eb881844
     }
 }
