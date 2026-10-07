@@ -35,7 +35,7 @@ class "b1: Besøg" as Besog {
     lokale = "X01"
     indtjekningskode = "81507192"
     status = "Tjekket Ind"    
-    udtjekningstid [0..1] = " "
+    udtjekningstid = " "
 }
 
 class "g1: Gæst" as Gaest {
