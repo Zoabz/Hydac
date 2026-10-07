@@ -32,7 +32,12 @@ namespace Hydac
         public Medarbejder(string brugernavn, string kode) {
             Brugernavn = brugernavn;
             Kode = kode;
-            
+
+        }
+
+        public bool TjekKode(string kode)
+        {
+            return Kode == kode;
         }
 
         public static List<Medarbejder> MedarbejderListe = new List<Medarbejder>
@@ -97,7 +102,7 @@ namespace Hydac
                 
                 foreach (Medarbejder m in MedarbejderListe)
                 {
-                    if (m.brugernavn == brugernavn && m.kode == kode)
+                    if (m.Brugernavn == brugernavn && m.TjekKode(kode))
                     {
                         Menu.erLoggetind = true;
                         Menu.aktivMedarbejder = brugernavn;

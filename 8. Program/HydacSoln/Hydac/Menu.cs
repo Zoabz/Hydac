@@ -55,9 +55,10 @@ namespace Hydac
                         Besøg.ListeBesøg();
                         break;
                     case "6":
-                        Besøg.TjekInd();
+                        Besøg.TjekGæstInd();
                         break;
                     case "7":
+<<<<<<< HEAD
                         Besøg.TjekUd();
 =======
 using System;
@@ -127,6 +128,9 @@ namespace Hydac
 =======
                         Besøg.TjekUd();
 >>>>>>> 559636fa843e8fe17f11e68a6d600d99eb881844
+=======
+                        Besøg.TjekGæstUd();
+>>>>>>> 07b222d47b39db04bb08e6adaff5d755cf5254e7
                         break;
                     default:
                         Console.Clear();
