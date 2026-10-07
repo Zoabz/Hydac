@@ -33,8 +33,9 @@ class "Besøg" as Besog {
     forventet ankomsttid
     forventet afgangstid
     lokale
-    status
     indtjekningskode
+    status
+    udtjekningstid [0..1]
 }
 
 class "Gæst" as Gaest {
@@ -47,18 +48,8 @@ class "Indtjekning" as Indtjekning {
     sikkerhedsfolder modtaget
 }
 
-class "Udtjekning" as Udtjekning {
-    udtjekningstid
-}
-
-
-
 Medarbejder "1" -right- "0..*" Besog : ansvarlig for
 Besog "1" -right- "1" Gaest : omfatter
 
 Besog "1" -- "0..1" Indtjekning : registreres ved
-Besog "1" -- "0..1" Udtjekning : afsluttes ved
-
-Indtjekning -[hidden]right- Udtjekning
-
 @enduml
