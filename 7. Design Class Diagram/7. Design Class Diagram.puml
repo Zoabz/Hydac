@@ -6,11 +6,12 @@ hide empty members
 
 skinparam classAttributeIconSize 0
 skinparam pageMargin 40
-skinparam nodesep 120
-skinparam ranksep 80
+left to right direction
+skinparam nodesep 40
+skinparam ranksep 100
 
 skinparam rectangle {
-    BackgroundColor #FAFAFA
+    BackgroundColor white
     BorderColor #BBBBBB
 }
 
@@ -88,10 +89,10 @@ class Besøg {
     + TjekUd() : void
 }
 
-Program "1" -right- "1" Menu : starter
-Menu "1" -down- "0..*" Besøg : bruger
-Menu "1  " -right- "1..*  " Medarbejder :   bruger
-
+Program "1" -- "1" Menu : starter
+Menu "1" -- "0..*" Besøg : besøgsListe
+Menu "1  " - "1..*  " Medarbejder :   medarbejdere
+Medarbejder "1" -- "1" Besøg : ansvarlige
 }
 
 @enduml
