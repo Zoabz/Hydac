@@ -32,7 +32,6 @@ class Medarbejder {
     + MedarbejderListe : List<Medarbejder>
     --
     + Medarbejder(brugernavn : string, kode : string)
-    + TjekKode(kode : string) : bool
     + OpretMedarbejder() : void
     + ListeMedarbejder() : void
     + Login() : void
