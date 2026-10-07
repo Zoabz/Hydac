@@ -35,7 +35,7 @@ class "Besøg" as Besog {
     lokale
     indtjekningskode
     status
-    udtjekningstid [0..1]
+    udtjekningstid
 }
 
 class "Gæst" as Gaest {
