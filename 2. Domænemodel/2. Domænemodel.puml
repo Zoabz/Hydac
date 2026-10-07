@@ -30,8 +30,13 @@ class "Medarbejder" as Medarbejder {
 
 class "Besøg" as Besog {
     dato
+<<<<<<< HEAD
+    forventet ankomst tid
+    forventet afgangs tid
+=======
     forventet ankomsttid
     forventet afgangstid
+>>>>>>> d0c158597ab168f24ce868f354b8876fd62e41d2
     lokale
     indtjekningskode
     status
@@ -44,10 +49,28 @@ class "Gæst" as Gaest {
 }
 
 class "Indtjekning" as Indtjekning {
+<<<<<<< HEAD
+    indtjeknings tid
+    sikkerhedsfolder modtagelse
+}
+
+class "Udtjekning" as Udtjekning {
+    udtjeknings tid
+=======
     indtjekningstid
     sikkerhedsfolder modtaget
 }
 
+<<<<<<< HEAD
+class "Udtjekning" as Udtjekning {
+    udtjekningstid
+>>>>>>> d0c158597ab168f24ce868f354b8876fd62e41d2
+}
+
+
+
+=======
+>>>>>>> 2c3013d82d9bfea932fb19feec7128ed599bec78
 Medarbejder "1" -right- "0..*" Besog : ansvarlig for
 Besog "1" -right- "1" Gaest : omfatter
 
