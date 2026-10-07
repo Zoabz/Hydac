@@ -38,8 +38,9 @@ class "Besøg" as Besog {
     forventet afgangstid
 >>>>>>> d0c158597ab168f24ce868f354b8876fd62e41d2
     lokale
-    status
     indtjekningskode
+    status
+    udtjekningstid [0..1]
 }
 
 class "Gæst" as Gaest {
@@ -60,6 +61,7 @@ class "Udtjekning" as Udtjekning {
     sikkerhedsfolder modtaget
 }
 
+<<<<<<< HEAD
 class "Udtjekning" as Udtjekning {
     udtjekningstid
 >>>>>>> d0c158597ab168f24ce868f354b8876fd62e41d2
@@ -67,12 +69,10 @@ class "Udtjekning" as Udtjekning {
 
 
 
+=======
+>>>>>>> 2c3013d82d9bfea932fb19feec7128ed599bec78
 Medarbejder "1" -right- "0..*" Besog : ansvarlig for
 Besog "1" -right- "1" Gaest : omfatter
 
 Besog "1" -- "0..1" Indtjekning : registreres ved
-Besog "1" -- "0..1" Udtjekning : afsluttes ved
-
-Indtjekning -[hidden]right- Udtjekning
-
 @enduml

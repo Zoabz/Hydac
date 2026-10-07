@@ -8,7 +8,7 @@ namespace Hydac
 {
     public static class Menu
     {
-        public static bool erLoggetind;
+        public static bool erLoggetInd;
         public static string aktivMedarbejder = "";
         public static void MenuShow()
         {
@@ -16,18 +16,18 @@ namespace Hydac
             {
                 // Vis menuen
                 Console.Clear();
-                Console.WriteLine("Hydac Komme-Gå-System");
+                Console.WriteLine("HYDAC Komme-gå-system");
                 Console.WriteLine("--------------------");
-                if (!Menu.erLoggetind)
-                    Console.WriteLine("1. Login");
+                if (!Menu.erLoggetInd)
+                    Console.WriteLine("1. Log ind");
                 else
                     Console.WriteLine("1. Log ud");
                 Console.WriteLine("2. Opret besøg");
                 Console.WriteLine("3. Opret medarbejder");
-                Console.WriteLine("4. Vis medarbejder");
-                Console.WriteLine("5. Vis besøg");
-                Console.WriteLine("6. Tjek Ind");
-                Console.WriteLine("7. Tjek Ud");
+                Console.WriteLine("4. Vis medarbejderliste");
+                Console.WriteLine("5. Vis gæsteliste");
+                Console.WriteLine("6. Tjek gæst ind");
+                Console.WriteLine("7. Tjek gæst ud");
                 Console.WriteLine("--------------------");
 
                 // Input fra aktøren
@@ -37,25 +37,25 @@ namespace Hydac
                 string? svar = Console.ReadLine();
                 switch (svar) {
                     case "1":
-                        if (!Menu.erLoggetind)
-                            Medarbejder.Login();
+                        if (!Menu.erLoggetInd)
+                            Medarbejder.LogInd();
                         else
-                            Medarbejder.LogOut();
+                            Medarbejder.LogUd();
                         break;
                     case "2":
-                        Besøg.AddBesøg();
+                        Besøg.OpretBesøg();
                         break;
                     case "3":
                         Medarbejder.OpretMedarbejder();
                         break;
                     case "4":
-                        Medarbejder.ListeMedarbejder();
+                        Medarbejder.VisMedarbejderliste();
                         break;
                     case "5":
-                        Besøg.ListeBesøg();
+                        Besøg.VisGæsteliste();
                         break;
                     case "6":
-                        Besøg.TjekGæstInd();
+                        Besøg.TjekInd();
                         break;
                     case "7":
 <<<<<<< HEAD

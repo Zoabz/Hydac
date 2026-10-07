@@ -43,8 +43,9 @@ class "b1: Besøg" as Besog {
     forventet afgangstid = "16:00"
 >>>>>>> d0c158597ab168f24ce868f354b8876fd62e41d2
     lokale = "X01"
-    status = "Tjekket Ind"
     indtjekningskode = "81507192"
+    status = "Tjekket Ind"    
+    udtjekningstid [0..1] = " "
 }
 
 class "g1: Gæst" as Gaest {

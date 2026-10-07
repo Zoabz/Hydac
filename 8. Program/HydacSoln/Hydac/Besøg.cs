@@ -6,38 +6,38 @@ namespace Hydac
 {
     public class Besøg
     {
-        public string Navn { get; set; }
+        public string GæstNavn { get; set; }
         public string Firma { get; set; }
         public string Ansvarlig { get; set; }
-        public DateTime ForventetAnkomst { get; set; }
-        public DateTime ForventetAfgang { get; set; }
-        public DateTime? IndTjekTid { get; set; }
-        public DateTime? UdTjekTid { get; set; }
+        public DateTime ForventetAnkomsttid { get; set; }
+        public DateTime ForventetAfgangstid { get; set; }
+        public DateTime? Indtjekningstid { get; set; }
+        public DateTime? Udtjekningstid { get; set; }
         public string Lokale { get; set; }
-        public int IndtjekningsKode { get; set; }
+        public int Indtjekningskode { get; set; }
         public string Status { get; set; }
-        public bool Sikkerhedsfolder { get; set; }
-        public DateTime? Date { get; set;  }
+        public bool SikkerhedsfolderModtaget { get; set; }
+        public DateTime? Dato { get; set;  }
         
-        public Besøg(string navn, string firma, string ansvarlig, DateTime forventetAnkomst, DateTime forventetAfgang,DateTime? date, DateTime? indtjektid,DateTime? udtjektid, string lokale, int indtjekningsKode, string status, bool sikkerhedsfolder)
+        public Besøg(string gæstNavn, string firma, string ansvarlig, DateTime forventetAnkomsttid, DateTime forventetAfgangstid,DateTime? dato, DateTime? indtjekningstid,DateTime? udtjekningstid, string lokale, int indtjekningskode, string status, bool sikkerhedsfolderModtaget)
         {
-            Navn = navn;
+            GæstNavn = gæstNavn;
             Firma = firma;
             Ansvarlig = ansvarlig;
-            ForventetAnkomst = forventetAnkomst;
-            ForventetAfgang = forventetAfgang;
-            Date = date;
-            IndTjekTid = indtjektid;
-            UdTjekTid = udtjektid;
+            ForventetAnkomsttid = forventetAnkomsttid;
+            ForventetAfgangstid = forventetAfgangstid;
+            Dato = dato;
+            Indtjekningstid = indtjekningstid;
+            Udtjekningstid = udtjekningstid;
             Lokale = lokale;
-            IndtjekningsKode = indtjekningsKode;
+            Indtjekningskode = indtjekningskode;
             Status = status;
-            Sikkerhedsfolder = sikkerhedsfolder;
+            SikkerhedsfolderModtaget = sikkerhedsfolderModtaget;
             
             
         }
 
-        public static List<Besøg> BesøgListe = new List<Besøg>();
+        public static List<Besøg> gæsteliste = new List<Besøg>();
 
         private static DateTime LæsDato(string i)
         {
@@ -55,20 +55,20 @@ namespace Hydac
             }
         }
 
-        public static void AddBesøg()
+        public static void OpretBesøg()
         {
-            if (Menu.erLoggetind == true)
+            if (Menu.erLoggetInd == true)
             {
                 Console.Clear();
                 Console.WriteLine("Opret Besøg");
                 Console.Write("Indtast Navn: ");
-                string? navn = Console.ReadLine();
+                string? gæstNavn = Console.ReadLine();
                 Console.Write("Indtast Firma: ");
                 string? firma = Console.ReadLine();
 
-                DateTime date = LæsDato("Indtast Dato: ");
-                DateTime forventetankomst = LæsDato("Indtast Forventet Ankomst: ");
-                DateTime forventetafgang = LæsDato("Indtast Forventet Afgang: ");
+                DateTime dato = LæsDato("Indtast Dato: ");
+                DateTime forventetAnkomsttid = LæsDato("Indtast Forventet Ankomsttid: ");
+                DateTime forventetAfgangstid = LæsDato("Indtast Forventet Afgangstid: ");
 
                 Console.Write("Indtast Lokale: ");
                 string? lokale = Console.ReadLine();
@@ -78,11 +78,11 @@ namespace Hydac
                 Random rnd = new Random();
                 int indtjekningskode = rnd.Next(10_000_000, 100_000_000);
 
-                DateTime indtjektid = DateTime.MinValue;
-                DateTime udtjektid = DateTime.MinValue;
+                DateTime indtjekningstid = DateTime.MinValue;
+                DateTime udtjekningstid = DateTime.MinValue;
                 string status = "Ikke Tjekket Ind";
-                bool sikkerhedsfolder = false;
-                BesøgListe.Add(new Besøg(navn, firma, ansvarlig, forventetankomst, forventetafgang, date, indtjektid, udtjektid, lokale, indtjekningskode, status, sikkerhedsfolder));
+                bool sikkerhedsfolderModtaget = false;
+                gæsteliste.Add(new Besøg(gæstNavn, firma, ansvarlig, forventetAnkomsttid, forventetAfgangstid, dato, indtjekningstid, udtjekningstid, lokale, indtjekningskode, status, sikkerhedsfolderModtaget));
             }
             else
             {
@@ -91,12 +91,12 @@ namespace Hydac
             }
         }
 
-        public static void ListeBesøg()
+        public static void VisGæsteliste()
         {
-            if (Menu.erLoggetind)
+            if (Menu.erLoggetInd)
             {
                 Console.Clear();
-                Console.WriteLine("Liste Besøg");
+                Console.WriteLine("Gæsteliste");
                 Console.WriteLine($"{"Navn",-12}" +
                         $"{"Firma",-15}" +
                         $"{"Ankomst",-8}" +
@@ -112,20 +112,20 @@ namespace Hydac
                         
                 Console.WriteLine(new string('-', 133));
 
-                foreach (Besøg b in BesøgListe)
+                foreach (Besøg b in gæsteliste)
                 {
-                    Console.WriteLine($"{b.Navn,-12}" +
+                    Console.WriteLine($"{b.GæstNavn,-12}" +
                         $"{b.Firma,-15}" +
-                        $"{b.ForventetAnkomst,-8:HH:mm}" +
-                        $"{b.ForventetAfgang,-8:HH:mm}" +
+                        $"{b.ForventetAnkomsttid,-8:HH:mm}" +
+                        $"{b.ForventetAfgangstid,-8:HH:mm}" +
                         $"{b.Lokale,-8}" +
                         $"{b.Ansvarlig,-15}" +
                         $"{b.Status,-18}" +
-                        $"{b.Date,-10:dd:MM:yy}" +
-                        $"{b.IndTjekTid,-12:HH:mm}" +
-                        $"{b.UdTjekTid,-12:HH:mm}" +
-                        $"{b.IndtjekningsKode,-10}" +
-                        $"{b.Sikkerhedsfolder,-16}");
+                        $"{b.Dato,-10:dd:MM:yy}" +
+                        $"{b.Indtjekningstid,-12:HH:mm}" +
+                        $"{b.Udtjekningstid,-12:HH:mm}" +
+                        $"{b.Indtjekningskode,-10}" +
+                        $"{b.SikkerhedsfolderModtaget,-16}");
                 }
             }
             else
@@ -135,15 +135,15 @@ namespace Hydac
 
         public static Besøg? FindBesøg(int indtjekningskode)
         {
-            foreach (Besøg b in BesøgListe)
+            foreach (Besøg b in gæsteliste)
             {
-                if (b.IndtjekningsKode == indtjekningskode)
+                if (b.Indtjekningskode == indtjekningskode)
                     return b;
             }
             return null;
         }
 
-        public static void TjekGæstInd()
+        public static void TjekInd()
         {
             Console.Clear();
             Console.Write("Indsæt indtjekningskode: ");
@@ -184,17 +184,17 @@ namespace Hydac
             Console.ReadLine();
         }
 
-        public void TjekInd(bool sikkerhedsfolder)
+        public void TjekInd(bool sikkerhedsfolderModtaget)
         {
             Status = "Tjekket Ind";
-            IndTjekTid = DateTime.Now;
-            Sikkerhedsfolder = sikkerhedsfolder;
+            Indtjekningstid = DateTime.Now;
+            SikkerhedsfolderModtaget = sikkerhedsfolderModtaget;
         }
 
         public void TjekUd()
         {
             Status = "Tjekket Ud";
-            UdTjekTid = DateTime.Now;
+            Udtjekningstid = DateTime.Now;
         }
     }
 }

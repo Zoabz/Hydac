@@ -35,19 +35,16 @@ namespace Hydac
 
         }
 
-        public bool TjekKode(string kode)
-        {
-            return Kode == kode;
-        }
+        
 
-        public static List<Medarbejder> MedarbejderListe = new List<Medarbejder>
+        public static List<Medarbejder> medarbejderliste = new List<Medarbejder>
         {
             new Medarbejder("Admin", "Admin123")
         };
 
         public static void OpretMedarbejder()
         {
-            if (Menu.erLoggetind == true)
+            if (Menu.erLoggetInd == true)
             {
                 Console.Clear();
                 Console.WriteLine("Opret Medarbejder");
@@ -57,24 +54,24 @@ namespace Hydac
                 Console.Write("Indsæt Kode: ");
                 string? kode = Console.ReadLine();
 
-                MedarbejderListe.Add(new Medarbejder(brugernavn, kode));
-                Console.WriteLine("---Bruger oprettet---");
-                Menu.erLoggetind = false;
+                medarbejderliste.Add(new Medarbejder(brugernavn, kode));
+                Console.WriteLine("---Medarbejder oprettet---");
+                Menu.erLoggetInd = false;
             }
             else
                 Console.WriteLine("Du skal være logget ind!");
             Console.ReadLine();
         }
 
-        public static void ListeMedarbejder()
+        public static void VisMedarbejderliste()
         {
-            if (Menu.erLoggetind) { 
+            if (Menu.erLoggetInd) { 
                 Console.Clear();
-                Console.WriteLine("Liste af Medarbejder");
+                Console.WriteLine("Medarbejderliste");
                 Console.WriteLine($"{"Brugernavn",-10}");
                 Console.WriteLine(new string('-', 10));
 
-                foreach (Medarbejder m in MedarbejderListe)
+                foreach (Medarbejder m in medarbejderliste)
                 {
                     Console.WriteLine($"{m.Brugernavn,-10}");
                 }
@@ -87,34 +84,34 @@ namespace Hydac
                 Console.ReadLine();
         }
 
-        public static void Login()
+        public static void LogInd()
         {
             Console.Clear();
             Console.WriteLine("Log ind");
             Console.WriteLine("--------------------");
-            if (Menu.erLoggetind == false)
+            if (Menu.erLoggetInd == false)
             {
                 Console.Write("Indtast Brugernavn: ");
                 string? brugernavn = Console.ReadLine();
-                Console.Write("Indtast Adgangskode: ");
+                Console.Write("Indtast Kode: ");
                 string? kode = Console.ReadLine();
 
                 
-                foreach (Medarbejder m in MedarbejderListe)
+                foreach (Medarbejder m in medarbejderliste)
                 {
-                    if (m.Brugernavn == brugernavn && m.TjekKode(kode))
+                    if (m.Brugernavn == brugernavn && m.kode == kode)
                     {
-                        Menu.erLoggetind = true;
+                        Menu.erLoggetInd = true;
                         Menu.aktivMedarbejder = brugernavn;
                     }
                     else
-                        Menu.erLoggetind = false;
+                        Menu.erLoggetInd = false;
                 }
 
 
-                if (Menu.erLoggetind == true)
+                if (Menu.erLoggetInd == true)
                 {
-                    Console.WriteLine("Login korrekt ");
+                    Console.WriteLine("Log ind korrekt ");
                 }
                 else
                     Console.WriteLine("Forkert brugernavn eller kode");
@@ -125,9 +122,9 @@ namespace Hydac
             Console.ReadLine();
         }
         
-        public static void LogOut()
+        public static void LogUd()
         {
-            Menu.erLoggetind = false;
+            Menu.erLoggetInd = false;
             Console.WriteLine("Du er logget ud!");
             Console.ReadLine();
             Menu.aktivMedarbejder = "";
